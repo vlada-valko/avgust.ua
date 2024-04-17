@@ -5,12 +5,16 @@ const navLinks = document.querySelector(".menu__list__link");
 const wrapper = document.querySelector(".wrapper");
 const menu = document.querySelector(".menu");
 const menu__burger__line = document.querySelector(".menu__burger__line");
+const header = document.querySelector(".header");
 
 
 btnSub.addEventListener("click", () => {
     wrapper.classList.toggle("overflow-hidden");
     menu__list.classList.toggle("nav-visible");
 	menu__burger__line.classList.toggle("nav-visible");
+	header.classList.toggle("nav-visible");
+	menu.classList.toggle("nav-visible");
+
 })
 
 navLinks.addEventListener("click", () => {
@@ -18,5 +22,7 @@ navLinks.addEventListener("click", () => {
     menu__list.classList.remove("nav-visible");
 	menu__list.classList.remove("nav-visible");
 	menu__burger__line.classList.remove("nav-visible");
+	header.classList.remove("nav-visible");
+	menu.classList.remove("nav-visible");
 
 })
