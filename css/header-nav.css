@@ -17,20 +17,16 @@
 }
 @media (min-width: 1000px) {
   .header__nav-wrapper {
-    position: relative;
-    width: 80%;
-    height: 60px;
-    margin: auto;
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
   }
-  .header__nav-logo a {
-    display: block;
-    width: 120px;
-    height: auto;
-  }
+}
+.header__nav-logo a {
+  display: block;
+  width: 120px;
+  height: auto;
+}
+.header__nav-logo img {
+  width: 100%;
 }
 .header__nav-menu a {
   color: var(--light-text-color);
@@ -86,221 +82,184 @@
   transform: rotate(45deg);
 }
 .header__nav-menu {
-  left: -100vh;
-  top: 60px;
-  transition: all 0.3s ease-in-out;
   position: absolute;
+  top: 60px;
+  left: -100vh;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease-in-out;
 }
 .header__nav-menu.nav-visible {
-  left: -20%;
-  top: 60px;
-  transition: all 0.3s ease-in-out;
   position: absolute;
-  margin: auto;
-  width: 140%;
-  height: 100vh;
+  top: 60px;
+  left: -20%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin: auto;
+  width: 140%;
+  height: 100vh;
   z-index: 1;
   background-color: black;
-}
-.header__nav-list li {
-  margin: 25px 0px;
-}
-.header__sotial-media-item {
-  margin: 20px 10px;
-}
-.header__nav-list {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.header__nav-list li {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
-  text-align: center;
+  transition: all 0.3s ease-in-out;
 }
 @media (min-width: 1000px) {
   .header__nav-menu {
-    width: 80%;
     position: static;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap;
     align-items: center;
-    order: 2;
-    height: auto;
+    margin: auto;
+    height: 60px;
+    width: 80%;
   }
+}
+.header__nav-list {
+  margin: 10px auto 30px;
+}
+@media (min-width: 1000px) {
   .header__nav-list {
-    width: 70%;
+    position: static;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap;
     align-items: center;
-    color: wheat;
-  }
-
-  .nav-list__item a::after {
-    content: "";
-    bottom: -7px;
-    width: 0%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    border-bottom: 2px solid var(--light-text-color);
-    transition: all 0.2s ease-out;
-  }
-  .nav-list__item a:hover::after {
-    content: "";
-    bottom: -7px;
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    border-bottom: 2px solid var(--light-text-color);
-    transition: all 0.2s ease-out;
-  }
-  .menu__parent-submenu::after {
-    content: "";
-    bottom: -7px;
-    width: 0%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    border-bottom: 2px solid var(--light-text-color);
-    transition: all 0.2s ease-out;
-  }
-  .menu__parent-submenu:hover::after {
-    content: "";
-    bottom: -7px;
-    width: calc(100% - 27px);
-    height: 100%;
-    display: block;
-    position: absolute;
-    border-bottom: 2px solid var(--light-text-color);
-    transition: all 0.2s ease-out;
-  }
-  .submenu__about-company {
-    display: block;
-    height: 0px;
-    overflow: hidden;
-    transition: height 0.2s ease-out;
+    margin: auto;
+    width: 75%;
   }
 }
-.header__nav-menu a {
-  position: relative;
-  color: var(--light-text-color);
-  text-decoration: none;
-  transition: 0.2s ease-out;
-}
-
-.header__nav-logo a {
-  display: block;
-  width: 100px;
-}
-.header__nav-logo img {
-  width: 100%;
-}
-.header__sotial-media img {
-  width: 25px;
-  height: auto;
-}
-
-.menu-btn-about-company {
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
-  padding: 0px 4px;
-  cursor: pointer;
-  transition: opacity 0.5s ease;
-}
-.menu-arrow {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background: url(../img/arrow-down.png) 0 0 / cover no-repeat;
-}
-.menu-arrow:hover {
-  display: block;
-  background: url(../img/arrow-up.png) 0 0 / cover no-repeat;
-  transform: rotate(180deg);
-}
-.nav-list__item {
-  display: flex;
-  flex-direction: column;
-}
-
-.submenu__about-company {
-  display: block;
-  height: 0px;
-  overflow: hidden;
-  transition: height 0.2s ease-out;
-}
-.submenu__about-company.submenu__visible {
-  display: block;
-  height: fit-content;
-  overflow: hidden;
-  transition: height 0.2s ease-out;
-  border-bottom: 1px solid white;
-  margin: -10px;
+.header__nav-menu li {
+  margin: 15px auto;
 }
 @media (min-width: 1000px) {
-  .menu-btn-about-company {
-    position: relative;
-  }
-  .submenu__about-company {
-    position: fixed;
-    width: 120%;
-    top: 65px;
-    left: 0;
-    transition: expandHeight 0.3s ease-in-out;
-    color: black;
-    border-top: 3px solid white;
-    background: black;
-    margin-bottom: 10px;  }
-  .submenu__about-company.submenu__visible {
-    position: fixed;
-    width: 120%;
-    top: 65px;
-    left: 0;
-    transition: expandHeight 0.3s ease-in-out;
-    color: black;
-    background: black;
-  }
-  @keyframes expandHeight {
-    from {
-        height: 0px; /* Початкова висота 0px */
-    }
-    to {
-        height: 200px; /* Кінцева висота (фіт-контент) */
-    }
-}
-  .submenu__about-company ul{
-    width: 70%;
+  .nav-list__item {
     margin: auto;
+  }
+}
+.nav-list__item a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.menu-arrow-about-company,
+.menu-arrow-department,
+.menu-arrow-information,
+.menu-arrow-education {
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: url(../img/arrow-down.png) 50% 50% / cover no-repeat;
+  margin: 0px 0px 0px 3px;
+  transition: all 0.3s ease-in-out;
+}
+.menu-arrow-about-company.submenu__visible,
+.menu-arrow-department.submenu__visible,
+.menu-arrow-information.submenu__visible,
+.menu-arrow-education.submenu__visible {
+  background: url(../img/arrow-up.png) 0 0 / cover no-repeat;
+  transform: rotate(180deg);
+  transition: all 0.3s ease-in-out;
+  width: 15px;
+  height: 15px;
+}
+.menu-btn-about-company-text.submenu__visible,
+.menu-btn-department-text.submenu__visible,
+.menu-btn-information-text.submenu__visible,
+.menu-btn-education-text.submenu__visible {
+  color: #eea028;
+}
+.submenu__about-company,
+.submenu__department,
+.submenu__information,
+.submenu__education {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 0px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.submenu__about-company ul,
+.submenu__department ul,
+.submenu__information ul,
+.submenu__education ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.submenu__about-company.submenu__visible,
+.submenu__department.submenu__visible,
+.submenu__information.submenu__visible,
+.submenu__education.submenu__visible {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 230px;
+  transition: all 0.3s ease-in-out;
+}
+.submenu__information.submenu__visible {
+  height: 200px;
+}
+.submenu__education.submenu__visible {
+  height: 100px;
+}
+
+@media (min-width: 1000px) {
+  .submenu__about-company,
+  .submenu__department,
+  .submenu__information,
+  .submenu__education {
+    left: -100vh;
+    top: 60px;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+  }
+  .submenu__about-company.submenu__visible,
+  .submenu__department.submenu__visible,
+  .submenu__information.submenu__visible,
+  .submenu__education.submenu__visible {
+    left: -20%;
+    top: 60px;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    margin: auto;
+    width: 140%;
+    height: 10vh;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    z-index: 1;
+    background-color: black;
   }
-  .submenu__about-company li{
-    margin: 50px 30px;
+  .submenu__about-company.submenu__visible ul,
+  .submenu__department.submenu__visible ul,
+  .submenu__information.submenu__visible ul,
+  .submenu__education.submenu__visible ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
   }
-  .submenu__about-company.submenu__visible a {
-    color: white;
+}
+.header__sotial-media img {
+  width: 30px;
+  margin: 10px;
+}
+@media (min-width: 1000px) {
+  .header__sotial-media img {
+    width: 30px;
+    margin: 0px 5px;
   }
 }
