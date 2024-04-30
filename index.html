@@ -5,16 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bakery Website</title>
-    <link rel="shortcut icon" href="img/bread-shorticon.png" type="image/png">
+    <title>
+        Avgust.ua
+    </title>
+    <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="index-body">
     <header>
         <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
     </header>
+    <img class="index-main-information__banner" src="img/index/index-background.jpg" alt="index-background">
+    <section class="index-main-information wrapper">
+        <h1>
+            Avgust.ua
+        </h1>
+        <p> З нами творчість виходить за рамки</p>
+        <div class="index-main-information__statistics ">
+            <div><img src="img/index/team.png" alt="team"><span><span
+                        class="index-main-information__statistics__team">23</span> співробітники</span></div>
+            <div><img src="img/index/clients.png" alt="team"><span>5000+ клієнтів</span></div>
+            <div><img src="img/index/calendar.png" alt="team"><span>23 роки на ринку</span></div>
+            <div><img src="img/index/office.png" alt="team"><span>Головний офіс, 2 представники, 12 дилерів у 6 областях
+                    України</span></div>
+        </div>
+    </section>
+    <script src="js/counter.js"></script>
 </body>
 
 </html>

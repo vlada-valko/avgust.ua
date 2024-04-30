@@ -3,7 +3,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 .header__nav-wrapper {
   position: relative;
@@ -103,7 +104,7 @@
   width: 140%;
   height: 100vh;
   z-index: 1;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
 }
 @media (min-width: 1000px) {
@@ -115,7 +116,6 @@
     align-items: center;
     margin: auto;
     height: 60px;
-    width: 80%;
   }
 }
 .header__nav-list {
@@ -216,7 +216,7 @@
   .submenu__department,
   .submenu__information,
   .submenu__education {
-    left: -100vh;
+    left: -2000vh;
     top: 60px;
     transition: all 0.3s ease-in-out;
     position: absolute;
@@ -241,7 +241,8 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
   }
   .submenu__about-company.submenu__visible ul,
   .submenu__department.submenu__visible ul,
