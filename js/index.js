@@ -5,6 +5,11 @@ const slideContainer = document.querySelector(".index__our-values__carousel-line
 
 let currentIndex = 0;
 
+// Отримуємо максимальну висоту карток та задаємо її як властивість CSS
+const maxHeightOfCards = getMaxHeight(sliderItems);
+document.documentElement.style.setProperty('--max-card-height', `${maxHeightOfCards}px`);
+console.log(maxHeightOfCards);
+
 function renderSlide() {
   // Очищаємо контейнер перед додаванням нових елементів
   slideContainer.innerHTML = '';
@@ -61,7 +66,3 @@ renderSlide();
 // Обробник подій для реагування на зміну розміру вікна
 window.addEventListener('resize', renderSlide);
 
-// Отримуємо максимальну висоту карток та задаємо її як властивість CSS
-const maxHeightOfCards = getMaxHeight(sliderItems);
-document.documentElement.style.setProperty('--max-card-height', `${maxHeightOfCards}px`);
-console.log(maxHeightOfCards);

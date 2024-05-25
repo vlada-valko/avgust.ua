@@ -85,7 +85,7 @@
   display: flex;
   position: relative;
   left: 0;
-  transition: left 0.5s ease;
+  transition: 1s ease-in-out;
 }
 
 .carousel__left-arrow {
@@ -158,3 +158,5 @@
     text-align: left;
     margin-bottom: 20px;
 }
+
+
