@@ -4,13 +4,13 @@ const burgerLine = document.querySelector(".menu-burger");
 const body = document.querySelector("body");
 const headerNavMenu = document.querySelector(".header__nav-menu");
 const wrapper = document.querySelector(".wrapper");
-btnBurger.addEventListener("click", () => {
-body.classList.toggle("overflow-hidden");
-headerNavMenu.classList.toggle("nav-visible");
-burgerLine.classList.toggle("nav-visible");
-wrapper.classList.toggle("nav-visible");
-});
 
+btnBurger.addEventListener("click", () => {
+  body.classList.toggle("overflow-hidden");
+  headerNavMenu.classList.toggle("nav-visible");
+  burgerLine.classList.toggle("nav-visible");
+  wrapper.classList.toggle("nav-visible");
+});
 
 /* SUBMENU */
 // Створюємо масив з іменами класів кнопок меню
@@ -25,6 +25,7 @@ const btnTextClasses = [".menu-btn-about-company-text", ".menu-btn-department-te
 // Створюємо масив з іменами класів стрілок кнопок
 const btnArrowClasses = [".menu-arrow-about-company", ".menu-arrow-department", ".menu-arrow-information", ".menu-arrow-education"];
 
+const toClose = [".submenu__about-company", ".submenu__department", ".submenu__information", ".submenu__education", ".nav-list__item-dont-close"];
 // Проходимось по кожному елементу масиву кнопок меню і додаємо подію click
 menuBtnClasses.forEach((menuBtnClass, index) => {
   const menuBtn = document.querySelector(menuBtnClass);
@@ -61,30 +62,23 @@ menuBtnClasses.forEach((menuBtnClass, index) => {
 });
 
 
+toClose.forEach((link) => {
+console.log(link);
+})
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    // Перевіряємо, чи клас поточного посилання є в масиві menuBtnClasses
-    const isLinkInMenuBtnClasses = menuBtnClasses.some(menuBtnClass => link.classList.contains(menuBtnClass));
-    
-    if (!isLinkInMenuBtnClasses) {
-      // Якщо клас поточного посилання НЕ входить в масив menuBtnClasses, виконуємо наступний код
-      
-      // Знімаємо клас "submenu__visible" з усіх підменю
-      submenuClasses.forEach((classItem) => {
-        const submenu = document.querySelector(classItem);
-        if (submenu) {
-          submenu.classList.remove("submenu__visible");
-        }
-      });
 
-      // Знімаємо клас "nav-visible" з усіх елементів меню
-      headerNavMenu.classList.remove("nav-visible");
-      burgerLine.classList.remove("nav-visible");
-      wrapper.classList.remove("nav-visible");
 
-      // Знімаємо клас "overflow-hidden" з body
-      body.classList.remove("overflow-hidden");
-    }
-  });
+
+
+const links = document.querySelectorAll('.submenu__about-company a, .submenu__department a, .submenu__information a, .submenu__education a, .nav-list__item-dont-close a');
+
+// Додаємо обробник подій для кожного посилання
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        // Змінюємо клас body при кліку на посилання
+        document.body.classList.remove('overflow-hidden');
+        headerNavMenu.classList.remove("nav-visible");
+  burgerLine.classList.remove("nav-visible");
+  wrapper.classList.remove("nav-visible");
+    });
 });

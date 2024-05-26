@@ -20,6 +20,7 @@ body {
   --dark-text-color: rgb(59, 59, 59);
   --light-gradient: linear-gradient(0deg, rgb(247, 247, 245) 0%,  rgb(255, 255, 255) 100%);
   --submenu-background-color: rgb(247, 247, 245);
+  --our-team-background: #02776E;
 }
 .wrapper {
   max-width: 80%;
