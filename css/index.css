@@ -56,7 +56,7 @@
 .index__our-values__and-corporate-culture {
   background: url(../img/index/line-background.svg ) 0 0 / cover no-repeat;
 }
-.index-body h2 {
+.big__h2 {
   font-size: 38px;
   font-weight: 400;
   font-family: "Philosopher", sans-serif;
@@ -67,7 +67,6 @@
 .index__our-values__carousel {
   position: relative;
   margin: auto;
-  border: 1px solid red;
   width: 100%;
   overflow: hidden;
 
@@ -80,7 +79,6 @@
   overflow: hidden;
   width: 95%;
   margin: auto;
-  border: 1px solid black;
   transition: transform 0.5s ease;
   display: flex;
   position: relative;
@@ -159,4 +157,112 @@
     margin-bottom: 20px;
 }
 
+.index-our-cultude-document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 50px;
+  max-width: 100%;
 
+}
+@media (min-width: 950px) {
+  .index-our-cultude-document{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80%;
+  }
+}
+@media (min-width: 1250px) {
+  .index-our-cultude-document{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 60%;
+  }
+}
+.index-our-cultude-document img {
+  max-width: 270px;
+  height: auto;
+  margin: 10px 10px 30px;
+}
+@media (min-width: 950px) {
+  .index-our-cultude-document img {
+    max-width: 325px;
+  margin-right: 35px;
+  }
+}
+.small__h2 {
+   display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--our-values-text-color);
+  text-transform: uppercase;
+  font-family: "Albert Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+.small__h2 img {
+  width: 20px;
+  height: auto;
+  margin:  0px 15px 0px 0px;
+}
+
+.index-our-cultude-document__text-title {
+  font-size: 34px;
+  font-weight: 200;
+  font-family: "Philosopher", sans-serif;
+  padding-top: 20px;
+  max-width: 100%;
+}
+@media (min-width: 950px) {
+  .index-our-cultude-document__text-title {
+    font-size: 38px;
+    font-weight: 400;
+    max-width: 80%;
+  }
+}
+.index-our-cultude-document__text-item {
+  font-family: "Albert Sans", sans-serif;
+  font-size: 16px;
+  color: var(--our-values-text-color);
+  font-weight: 400;
+  padding-top: 20px;
+  max-width: 100%;
+text-align: justify;
+}
+@media (min-width: 950px) {
+  .index-our-cultude-document__text-item {
+    max-width: 80%;
+    font-size: 17px;
+
+  }
+}
+.button {
+  display: block;
+  border: 1px solid var(--dark-text-color);
+  color: var(--dark-text-color);
+  border-radius: 25px;
+  width: fit-content;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 35px;
+  transition: all 0.3s ease-in-out;
+  background: none;
+}
+@media (min-width: 950px) {
+  .button {
+    font-size: 15px;
+  }
+}
+.button:hover {
+  background: var(--dark-text-color);
+  transition: all 0.3s ease-in-out;
+  color: var(--light-text-color);
+}

@@ -61,3 +61,30 @@ menuBtnClasses.forEach((menuBtnClass, index) => {
 });
 
 
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    // Перевіряємо, чи клас поточного посилання є в масиві menuBtnClasses
+    const isLinkInMenuBtnClasses = menuBtnClasses.some(menuBtnClass => link.classList.contains(menuBtnClass));
+    
+    if (!isLinkInMenuBtnClasses) {
+      // Якщо клас поточного посилання НЕ входить в масив menuBtnClasses, виконуємо наступний код
+      
+      // Знімаємо клас "submenu__visible" з усіх підменю
+      submenuClasses.forEach((classItem) => {
+        const submenu = document.querySelector(classItem);
+        if (submenu) {
+          submenu.classList.remove("submenu__visible");
+        }
+      });
+
+      // Знімаємо клас "nav-visible" з усіх елементів меню
+      headerNavMenu.classList.remove("nav-visible");
+      burgerLine.classList.remove("nav-visible");
+      wrapper.classList.remove("nav-visible");
+
+      // Знімаємо клас "overflow-hidden" з body
+      body.classList.remove("overflow-hidden");
+    }
+  });
+});
