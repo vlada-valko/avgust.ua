@@ -1,6 +1,6 @@
 
 
-$(document).ready(function(){
+$(window).on('load', function() {
 	$('.slider').slick({
 		arrows:true,
 		dots:true,
