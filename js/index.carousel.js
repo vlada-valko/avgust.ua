@@ -8,7 +8,7 @@ function initSlick() {
         slidesToShow: slidesToShow,
         autoplay:true,
         speed:1000,
-        autoplaySpeed:800000,
+        autoplaySpeed:5000,
         responsive:[
             {
                 breakpoint: 1150,
