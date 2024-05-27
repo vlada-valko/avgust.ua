@@ -1,0 +1,19 @@
+.index__charity {
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--our-team-background);
+    background-image: url('../img/index/charity-background.png'), url('../img/index/charity-background-copy.png');
+    background-position: left, right;
+    background-repeat: no-repeat, no-repeat;
+    background-size: contain, contain;
+}
+
+.index__charity .big__h2 {
+    padding: 0;
+    color: var(--light-text-color);
+    margin: 20px auto;
+}
+.index__charity .btn-wrapper-light {
+    margin-bottom: 50px;
+}
