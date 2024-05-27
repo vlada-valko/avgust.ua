@@ -1,0 +1,43 @@
+.index__avgust-in-numbers {
+    background: url(../img/index/line-background.svg) 0 0 /cover no-repeat;
+}
+.index__avgust-in-numbers__numder-line {
+    display: grid;
+   grid-template-columns: 1fr;
+    padding: 50px 0px;
+}
+@media(min-width: 600px) {
+    .index__avgust-in-numbers__numder-line {
+        display: grid;
+       grid-template-columns: 1fr 1fr;
+    } 
+}
+@media(min-width: 800px) {
+    .index__avgust-in-numbers__numder-line {
+        display: grid;
+       grid-template-columns: repeat(4, 1fr);
+    } 
+}
+.index__avgust-in-numbers-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+@media (min-width:800px) {
+    .index__avgust-in-numbers-item {
+        margin-bottom: 20px;
+    }
+}
+.index__avgust-in-numbers-item .counter {
+    font-family: "Philosopher", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+}
+.index__avgust-in-numbers-item .counter-text {
+    font-family: "Albert Sans", sans-serif;
+    color: var(--dark-text-color);
+    font-size: 24px;
+    line-height: 25px;
+}

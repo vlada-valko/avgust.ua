@@ -1,0 +1,25 @@
+.index__company-history {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url(../img/index/history-background.jfif) 0 0 / cover  no-repeat;
+    color: var(--light-text-color);
+}
+.index__company-history img {
+    margin-top: 20px;
+    width: 70px;
+    height: auto;
+}
+.index__company-history p {
+    margin: 20px auto;
+    font-family: "Albert Sans", sans-serif;
+    font-size: 17px;
+}
+.index__company-history .btn-wrapper-light {
+    margin-bottom: 50px;
+}
+.index__company-history .big__h2 {
+margin-top: 20px;
+padding: 0;
+}

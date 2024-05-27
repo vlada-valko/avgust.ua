@@ -3,6 +3,9 @@
 function init() {
   import("./menu.js");
   import("./index.carousel.js");
+  import("./counter.js");
+
+
 
 }
 const totalPartials = document.querySelectorAll('[hx-trigger="load"], [data-hx-trigger="load"]').length;

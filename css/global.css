@@ -49,13 +49,95 @@ h1, h2, h3 {
 }
 
 
-.button-click {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* BUTTONS /*
+/*BLACK*/
+
+
+.btn-wrapper a{
+  display: block;
+  width: fit-content;
+  font-size: 15px;
+  font-family: "Albert Sans", sans-serif;
+  padding:7px 20px ;
+  text-decoration: none;
   color: var(--dark-text-color);
-  background: none;
   border: 1px solid var(--dark-text-color);
   border-radius: 24px;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .3s;
+}
+
+.btn-wrapper a span{
+  position: relative;
+  z-index: 2;
+}
+
+.btn-wrapper a:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--dark-text-color);
+  transition: all .3s;
+  border-radius: 24px;
+  opacity: 0;
+}
+
+.btn-wrapper a:hover{
+  color: var(--light-text-color);
+}
+
+.btn-wrapper a:hover:after{
+  width: 100%;
+  opacity: 1;
+}
+
+
+
+/*LIGHT*/
+ .btn-wrapper-light a{
+  display: block;
+  width: fit-content;
+  font-size: 15px;
+  font-family: "Albert Sans", sans-serif;
+  padding:7px 20px ;
   text-decoration: none;
+  color: var(--light-text-color);
+  border: 1px solid var(--light-text-color);
+  border-radius: 24px;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .3s;
+}
+
+.btn-wrapper-light a span{
+  position: relative;
+  z-index: 2;
+}
+
+.btn-wrapper-light a:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--light-text-color);
+  transition: all .3s;
+  border-radius: 24px;
+  opacity: 0;
+}
+
+.btn-wrapper-light a:hover{
+  color: var(--dark-text-color);
+}
+
+.btn-wrapper-light a:hover:after{
+  width: 100%;
+  opacity: 1;
 }
