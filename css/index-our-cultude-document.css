@@ -1,0 +1,71 @@
+.index-our-cultude-document {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 50px;
+    max-width: 100%;
+  }
+  @media (min-width: 950px) {
+    .index-our-cultude-document {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 80%;
+    }
+  }
+  @media (min-width: 1250px) {
+    .index-our-cultude-document {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 60%;
+    }
+  }
+  
+  .index-our-cultude-document img {
+    max-width: 70%;
+    height: auto;
+    margin: 10px 10px 30px;
+  }
+  
+  @media (min-width: 950px) {
+    .index-our-cultude-document img {
+      max-width: 50%;
+      margin-right: 35px;
+    }
+  }
+  
+  .small__h2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--our-values-text-color);
+    text-transform: uppercase;
+    font-family: "Albert Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  
+  .small__h2 img {
+    width: 20px;
+    height: auto;
+    margin: 0px 15px 0px 0px;
+  }
+  
+  .index-our-cultude-document__text-title {
+    font-size: 34px;
+    font-weight: 200;
+    font-family: "Philosopher", sans-serif;
+    padding-top: 20px;
+    max-width: 100%;
+  }
+  
+  @media (min-width: 950px) {
+    .index-our-cultude-document__text-title {
+      padding-top: 0px;
+      max-width: 75%;
+    }
+  }

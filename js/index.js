@@ -1,7 +1,10 @@
+
+
 function init() {
   import("./menu.js");
   import("./counter.js");
   import("./index.carousel.js");
+
 }
 const totalPartials = document.querySelectorAll('[hx-trigger="load"], [data-hx-trigger="load"]').length;
 let loadedPartialsCount = 0;

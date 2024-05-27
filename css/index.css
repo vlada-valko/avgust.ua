@@ -1,21 +1,26 @@
+
 .index-body {
-    overflow-x: hidden;
-    margin-top: 60px;
-  }
-  .index-main-information {
-        font-family: "Albert Sans", sans-serif;
-      font-weight: 400;
-      font-size: 20px;
-      color: var(--dark-text-color);
-  }
+  overflow-x: hidden;
+  margin-top: 60px;
+}
+
+.index-main-information {
+  font-family: "Albert Sans", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--dark-text-color);
+}
+
 .header-banner {
   width: 100%;
   height: fit-content;
   padding: 30px;
 }
+
 .index-header-banner {
   background: url(../img/index/main-banner.jpg) 0 0 / cover no-repeat;
 }
+
 .header-banner h1 {
   width: 100%;
   height: 100%;
@@ -28,23 +33,27 @@
   line-height: 25px;
   text-align: justify;
 }
+
 @media (min-width:800px) {
   .header-banner h1 {
-  font-size: 21px;
-  line-height: 33px;
+    font-size: 21px;
+    line-height: 33px;
   }
 }
+
 @media (min-width:650px) {
   .header-banner h1 {
-  flex-direction: row;
+    flex-direction: row;
   }
 }
+
 .header-banner img {
   width: 100px;
   height: auto;
   margin-right: 25px;
   margin-bottom: 10px;
 }
+
 @media (min-width:650px) {
   .header-banner img {
     width: 150px;
@@ -54,8 +63,9 @@
 }
 
 .index__our-values__and-corporate-culture {
-  background: url(../img/index/line-background.svg ) 0 0 / cover no-repeat;
+  background: url(../img/index/line-background.svg) 0 0 / cover no-repeat;
 }
+
 .big__h2 {
   font-size: 38px;
   font-weight: 400;
@@ -64,280 +74,6 @@
   padding-top: 50px;
   width: fit-content;
 }
-.index__our-values__carousel {
-  position: relative;
-  margin: auto;
-  width: 100%;
-  overflow: hidden;
 
-}
-.index__our-values__carousel-line {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 50px 10px;
-  overflow: hidden;
-  width: 95%;
-  margin: auto;
-  transition: transform 0.5s ease;
-  display: flex;
-  position: relative;
-  left: 0;
-  transition: 1s ease-in-out;
-}
 
-.carousel__left-arrow {
-  display: block;
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  top: calc(50% - 15px);
-  left: -5px;
-  transform: rotate(90deg);
-}
-.carousel__right-arrow {
-  display: block;
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  top: calc(50% - 15px);
-  right: -5px;
-  transform: rotate(270deg);
-}
-.carousel__left-arrow img, .carousel__right-arrow img {
-  width: 100%;
-  height: auto;
-}
-.index__our-values__carousel-card {
-  padding: 0 20px;
-  background: rgb(247, 247, 245);
-  width: calc(100% - 20px);
-  margin: 0px 10px;
-  flex-shrink: 0; 
-  height: var(--max-card-height);
-}
-@media(min-width:800px) {
-  .index__our-values__carousel-card {
-    width: calc(50% - 20px);
-  }
-  }
-@media(min-width:1150px) {
-.index__our-values__carousel-card {
-  width: calc(33.333% - 20px);
-}
-}
-.card__circle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  margin: auto;
-  background: var(--dark-text-color);
-  transform: translateY(-50%);
-  border-radius: 50%;
-}
-.card__circle img {
-  width: 65%;
-  height: auto;
-}
-.index__our-values__carousel-title {
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 15px;
-  font-family: "Philosopher", sans-serif;
 
-}
-.index__our-values__carousel-text {
-    color: var(--our-values-text-color);
-    font-size: 16px;
-    font-weight: 100;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.index-our-cultude-document {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 50px;
-  max-width: 100%;
-
-}
-@media (min-width: 950px) {
-  .index-our-cultude-document{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 80%;
-  }
-}
-@media (min-width: 1250px) {
-  .index-our-cultude-document{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 60%;
-  }
-}
-.index-our-cultude-document img {
-  max-width: 270px;
-  height: auto;
-  margin: 10px 10px 30px;
-}
-@media (min-width: 950px) {
-  .index-our-cultude-document img {
-    max-width: 325px;
-  margin-right: 35px;
-  }
-}
-.small__h2 {
-   display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: var(--our-values-text-color);
-  text-transform: uppercase;
-  font-family: "Albert Sans", sans-serif;
-  font-size: 10px;
-  font-weight: 800;
-}
-.small__h2 img {
-  width: 20px;
-  height: auto;
-  margin:  0px 15px 0px 0px;
-}
-
-.index-our-cultude-document__text-title {
-  font-size: 34px;
-  font-weight: 200;
-  font-family: "Philosopher", sans-serif;
-  padding-top: 20px;
-  max-width: 100%;
-}
-@media (min-width: 950px) {
-  .index-our-cultude-document__text-title {
-    font-size: 38px;
-    font-weight: 400;
-    max-width: 80%;
-  }
-}
-.index-our-cultude-document__text-item {
-  font-family: "Albert Sans", sans-serif;
-  font-size: 16px;
-  color: var(--our-values-text-color);
-  font-weight: 400;
-  padding-top: 20px;
-  max-width: 100%;
-text-align: justify;
-}
-@media (min-width: 950px) {
-  .index-our-cultude-document__text-item {
-    max-width: 80%;
-    font-size: 17px;
-
-  }
-}
-.button {
-  display: block;
-  border: 1px solid var(--dark-text-color);
-  color: var(--dark-text-color);
-  border-radius: 25px;
-  width: fit-content;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  margin-top: 35px;
-  transition: all 0.3s ease-in-out;
-  background: none;
-}
-@media (min-width: 950px) {
-  .button {
-    font-size: 15px;
-  }
-}
-.button:hover {
-  background: var(--dark-text-color);
-  transition: all 0.3s ease-in-out;
-  color: var(--light-text-color);
-}
-
-.index__our-team {
-  background: var(--our-team-background);
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  color: var(--light-text-color);
-}
-@media (min-width:800px) {
-  .index__our-team {
-    flex-direction: row;
-  }
-}
-.index__our-team__photo {
-  width: 100%;
-  object-fit: cover;
-  margin: 0px 0px 20px 0px;
-}
-@media (min-width:800px) {
-.index__our-team__photo {
-  max-width: 50%;
-  margin: 0px 20px 0px 0px;
-}
-}
-.index__our-team-info {
-  max-width: 80%;
-margin: auto;  
-}
-@media (min-width:800px) {
-  .index__our-team-info {
-  max-width: 50%;
-  margin: auto;
-}
-}
-
-.index__our-team-info h2 {
-  margin-bottom: 20px;
-  color: var(--light-text-color);
-}
-.index__our-team__slogan {
-  font-family: Philosopher, sans-serif;
-  font-size: 35px;
-  max-width: 100%;
-  margin-bottom: 20px;
-}
-@media (min-width:800px) {
-  .index__our-team__slogan {
-    max-width: 85%;
-    font-size: 30px;
-  }
-}
-.index__our-team__TeamValues {
-
-}
-.index__our-team__list {
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-}
-@media (min-width:800px) {
-  .index__our-team__list {
-    font-size: 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-  }
-}
-.index__our-team__list ul{
-  list-style:disc;
-  padding-left: 14px;
-} 
-.index__our-team__list li{
-  margin-bottom: 3px;
-} 
