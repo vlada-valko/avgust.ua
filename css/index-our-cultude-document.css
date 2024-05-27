@@ -69,3 +69,181 @@
       max-width: 75%;
     }
   }
+  
+.card__circle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    background: var(--dark-text-color);
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+  
+  .card__circle img {
+    width: 65%;
+    height: auto;
+  }
+  
+  .index__our-values__carousel-title {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    font-family: "Philosopher", sans-serif;
+  }
+  .index__our-values__carousel-text {
+    color: var(--our-values-text-color);
+    font-size: 12px;
+    font-weight: 100;
+    text-align: left;
+    margin-bottom: 20px;
+    height: 60%;
+    overflow-y:auto;
+  }
+  
+  @media(min-width:400px) {
+    .index__our-values__carousel-title {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    .index__our-values__carousel-text {
+      color: var(--our-values-text-color);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+  }
+  @media(min-width:1150px) {
+    .index__our-values__carousel-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .index__our-values__carousel-text {
+      color: var(--our-values-text-color);
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  }
+  
+  
+  
+  /* Additional styles for Slick slider */
+  .slick-slider {
+    min-width: 0;
+  }
+  
+  .slick-list {
+    overflow: hidden;
+  }
+  
+  .slick-track {
+    display: flex;
+    align-items: center;
+    padding-top: 50px;
+  }
+  
+  .slick-slide {}
+  
+  .slick-slide.slick-active {}
+  
+  .slick-slide.slick-current {}
+  
+  .slick-slide.slick-center {}
+  
+  .slick-arrow {}
+  
+  .slick-arrow.slick-prev {}
+  
+  .slick-arrow.slick-next {}
+  
+  .slick-arrow.slick-disabled {}
+  
+  .slick-dots {}
+  
+  .slick-dots li {}
+  
+  .slick-dots button {}
+  
+  .slider {
+    position: relative;
+    padding: 0px 60px;
+  }
+  
+  @media (max-width:767px) {
+    .slider {
+      padding: 0px 40px;
+    }
+  }
+  
+  .slider .slick-arrow {
+    position: absolute;
+    top: 50%;
+    margin: -30px 0px 0px 0px;
+    z-index: 10;
+    font-size: 0;
+    width: 30px;
+    height: 60px;
+  }
+  
+  .slider .slick-arrow.slick-prev {
+    left: 0;
+    background: url('../img/index/arrow.png') 0 0 / 100% no-repeat;
+    transform: rotate(90deg);
+    border: none;
+  
+  }
+  
+  .slider .slick-arrow.slick-next {
+    right: 0;
+    background: url('../img/index/arrow.png') 0 0 / 100% no-repeat;
+    transform: rotate(270deg);
+    border: none;
+  }
+  
+  .slider .slick-arrow.slick-disabled {
+    opacity: 0.2;
+  }
+  
+  .slider .slick-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slider .slick-dots li {
+    list-style: none;
+    margin: 0px 10px;
+  }
+  
+  .slider .slick-dots button {
+    font-size: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  
+  .slider .slick-dots li.slick-active button {
+    background-color: var(--submenu-background-color);
+    border: 1px solid ;
+  }
+  
+  .slider__item {
+    position: relative;
+    padding: 0px 15px;
+    margin-right: 10px;
+    background: var(--submenu-background-color);
+    height: var(--max-slider-height);
+   height: 300px;
+    
+  }
+  
+  .slider__item img {
+    max-width: 100%;
+  }
+  
+  .slider__item.slick-center {}
+  
+ 

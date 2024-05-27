@@ -2,7 +2,6 @@
 
 function init() {
   import("./menu.js");
-  import("./counter.js");
   import("./index.carousel.js");
 
 }
