@@ -1,0 +1,17 @@
+footer {
+    background: url(../img/index/footer-background.jpg) 0 0 / cover no-repeat;
+}
+.footer__media {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+@media (miin-width:800px) {
+    .footer__media {
+        flex-direction: row;
+    }
+}
+.footer__logo {
+    max-width: 176px;
+    height: auto;
+}

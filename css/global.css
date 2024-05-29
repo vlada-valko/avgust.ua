@@ -24,7 +24,7 @@ body {
 }
 .wrapper {
   max-width: 80%;
-  margin: auto;
+  margin: 0px auto;
   transition: all 0.3s ease-in-out;
 }
 .wrapper.nav-visible {

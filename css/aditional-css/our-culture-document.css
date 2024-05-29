@@ -1,0 +1,96 @@
+.aditional-page__our-culture {
+  max-width: 80%;
+  margin: 120px auto;
+}
+
+body {
+  background: url(../../img/index/line-background.svg) 0 0 / cover no-repeat;
+  font-family: "Philosopher", sans-serif;
+}
+.accordion-container {
+  position: relative;
+  max-width: 500px;
+  height: auto;
+  margin: 10px auto;
+  max-width: 80%;
+}
+.accordion-container > h1 {
+  font-size: 38px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--dark-text-color);
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--submenu-background-color);
+}
+.aditional-page__our-culture-description {
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--dark-text-color);
+}
+.aditional-page__our-culture-description span {
+  font-size: 22px;
+}
+.set {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: var(--submenu-background-color);
+}
+.set > a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 600;
+  border-bottom: 1px solid var(--submenu-background-color);
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.set > a i {
+  float: right;
+  margin-top: 2px;
+}
+.set > a.active {
+  background-color: #3399cc;
+  color: #fff;
+}
+.content {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: none;
+}
+.content p {
+  padding: 10px 15px;
+  margin: 0;
+  color: #333;
+}
+
+.fa-plus::before {
+  background: url(../../img/menu/arrow-down.png) 0 0 / cover no-repeat;
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  transition: all 0.3s ease-in-out;
+}
+.fa-minus::before {
+  background: url(../../img/menu/arrow-up.png) 0 0 / cover no-repeat;
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(180deg);
+}
+.content, .iframe {
+    min-width: 100%;
+    height: 65vh;
+    border: none;
+}

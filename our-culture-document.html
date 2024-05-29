@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/aditional-css/our-culture-document.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/htmx.org@1.4.0"></script>
+
+</head>
+
+<body>
+  <header>
+    <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
+  </header>
+  <main class="aditional-page__our-culture">
+    <div class="accordion-container">
+      <h1>Корпоративна культура та
+        професійно-етичний код</h1>
+      <p class="aditional-page__our-culture-description">
+        <span>Корпоративна культура</span> – це сукупність прийнятих усіма членами організації ідей, поглядів,
+        цінностей, які є
+        орієнтирами їхньої поведінки та дій. Головний показник розвиненої корпоративної культури: переконаність усіх
+        співробітників у тому, що їхня організація – найкраща.
+      </p>
+      <div class="set">
+        <a href="#">
+          Корпоративна культура
+          <i class="fa-plus"></i>
+        </a>
+        <div class="content">
+          <iframe class="iframe" src="documents/Corporate-culture.pdf#zoom=75">
+            Упс, схоже ваш пристрій не підтримує відображення пдф у браузері
+        </iframe>
+        </div>
+      </div>
+      <p class="aditional-page__our-culture-description">
+        <span>Професійно-етичний код</span> - це правила поведінки, встановлені в організації та забезпечують ефективну
+        діяльність як окремих співробітників, так і всієї організації в цілому.
+      </p>
+      <div class="set">
+        <a href="#">
+          Phasellus
+          <i class="fa fa-plus"></i>
+        </a>
+        <div class="content">
+          <p> Aliquam cursus vitae nulla non rhoncus. Nunc condimentum erat nec dictum tempus. Suspendisse aliquam erat
+            hendrerit vehicula vestibulum.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="js/slick.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
