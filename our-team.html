@@ -1,22 +1,46 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/aditional-css/our-team.css">
+    <title>
+        Avgust.ua
+    </title>
+    <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <title>Карточки працівників</title>
-   
+    <link rel="stylesheet" href="css/aditional-css/our-team.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
 </head>
 <body>
-    <main>
-    <div id="employees-container">
+    <header>
+        <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
+    </header>
+    <main class="aditional-page__our-team">
+
+        <div class="container">
+            <h1 class="text-center">Когось шукаєте?</h1>
+            <div class="form-control-group">
+                <input type="text" id="elastic">
+            </div>
+            <div>
+                <ul class="elastic">
+                   
+                </ul>
+            </div>
+        </div>
+
+    <div class="employees-container">
     </div>
+    
 </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/slick.min.js"></script>
     <script src="js//our-team-import.js"></script>
-
+    <script src="js/slick.min.js"></script>
+  
     <script src="js/index.js"></script>
 </body>
 </html>

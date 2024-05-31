@@ -1,14 +1,54 @@
-.card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    width: 300px;
-    background-color: #f9f9f9;
+.aditional-page__our-team {
+     margin: 120px auto;
+    max-width: 80%;
 }
-.card h2 {
-    margin-top: 0;
+.employees-container {
+   
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
-.card p {
-    margin: 5px 0;
+.employee-photo img{
+    width: 200px;
+    height: auto;
+}
+
+.block-25 img{
+    display: block;
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+.block-25-h2 {
+    font-size: 18px;
+    text-align: center;
+}
+
+.block-25 h3 {
+    font-size: 14px;
+    text-align: center;
+}
+
+#elastic {
+    display: block;
+    margin: 40px 0;
+}
+.text-center {
+    text-align: center;
+}
+
+.elastic li{
+    transition: all ease 500ms;
+}
+
+.elastic li.hide {
+    display: none;
+}
+
+mark {
+    background: pink;
+}
+
+.button-success a {
+    color: #fff;
+    text-decoration: none;
 }

@@ -6,6 +6,7 @@ function init() {
   import("./index.carousel.js");
   import("./our-culture-accordeon.js");
   import("./download-btn.js");
+  import("./elastic-search.js");
   import("./our-team-import.js");
 
 }
