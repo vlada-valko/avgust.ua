@@ -68,5 +68,4 @@ fetch('../json/file.json')
                 }
             }
         });
-    })
-    .catch(error => console.error('Помилка:', error));
+    });
