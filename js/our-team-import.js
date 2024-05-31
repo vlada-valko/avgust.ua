@@ -3,13 +3,14 @@ fetch('../json/file.json')
     .then(data => {
         // Отримання контейнера для карточок працівників
         var container = document.querySelector('.employees-container');
+        var cards = []; // Масив для зберігання карточок
 
         // Створення HTML для кожного працівника
         data.forEach(function(employee) {
             const fullName = employee["П.І.Б"];
             const lastName = fullName.split(" ")[0];
             
-            // Спробуємо відобразити фото з розширенням .jpg
+            // Створення URL для фотографії
             let photoSrc = `../img/employee/${lastName}.jpg`;
             let imgElement = new Image();
             imgElement.onload = function() {
@@ -17,7 +18,7 @@ fetch('../json/file.json')
                 appendCard(photoSrc, employee);
             };
             imgElement.onerror = function() {
-                // Фото з розширенням .jpg відсутнє, спробуємо використати фото з розширенням .png
+                // Фото з розширенням .jpg відсутнє, спробуємо використати .png
                 photoSrc = `../img/employee/${lastName}.png`;
                 let imgElementPng = new Image();
                 imgElementPng.onload = function() {
@@ -25,7 +26,7 @@ fetch('../json/file.json')
                     appendCard(photoSrc, employee);
                 };
                 imgElementPng.onerror = function() {
-                    // Фото з розширенням .png відсутнє, спробуємо використати фото з розширенням .jfif
+                    // Фото з розширенням .png відсутнє, спробуємо використати .jfif
                     photoSrc = `../img/employee/${lastName}.jfif`;
                     let imgElementJfif = new Image();
                     imgElementJfif.onload = function() {
@@ -43,6 +44,7 @@ fetch('../json/file.json')
             };
             imgElement.src = photoSrc;
 
+            // Функція для створення карточки та додавання її до масиву
             function appendCard(photoSrc, employee) {
                 var cardHTML = `
                     <div class="card">
@@ -54,12 +56,16 @@ fetch('../json/file.json')
                             <p>Департамент: ${employee["Департамент"]}</p>
                             <p>Позиція в компанії: ${employee["Позиція в компанії"]}</p>
                             <div class="btn-wrapper">
-                    <a href="#"><span>Детальна інформація</span></a>
-                </div>
+                                <a href="#"><span>Детальна інформація</span></a>
+                            </div>
                         </div>
                     </div>
                 `;
-                container.innerHTML += cardHTML;
+                cards.push(cardHTML); // Додавання HTML карточки до масиву
+                if (cards.length === data.length) {
+                    // Якщо усі карточки створені, вставляємо їх до контейнера
+                    container.innerHTML = cards.join('');
+                }
             }
         });
     })
