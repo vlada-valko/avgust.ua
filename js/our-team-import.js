@@ -1,4 +1,4 @@
-fetch('../json/file.json')
+fetch('json/file.json')
     .then(response => response.json())
     .then(data => {
         // Отримання контейнера для карточок працівників
