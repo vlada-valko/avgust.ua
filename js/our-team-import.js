@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <div class="employee-info">
                                 <h2 class="big__h2">${employee["П.І.Б"]}</h2>
                                 <p>Департамент: ${employee["Департамент"]}</p>
-                                <p>Позиція в компанії: ${employee["Позиція в компанії"]}</p>
+                                <p>Посада: ${employee["Позиція в компанії"]}</p>
                                 <div class="btn-wrapper">
                                     <a class="team-active" href="#"><span>Детальна інформація</span></a>
                                 </div>
@@ -78,3 +78,5 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 });
+
+
