@@ -20,7 +20,7 @@ $(document).ready(function() {
     });
 });
 
-fetch('../json/file.json')
+fetch('json/file.json')
     .then(response => response.json())
     .then(data => {
         const listContainer = document.querySelector('.elastic');
