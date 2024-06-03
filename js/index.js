@@ -5,7 +5,6 @@ function init() {
   import("./index.carousel.js");
   import("./counter.js");
   import("./our-culture-accordeon.js");
-  import("./our-team-import.js");
 
 
 }

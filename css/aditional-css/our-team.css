@@ -2,53 +2,75 @@
      margin: 120px auto;
     max-width: 80%;
 }
-.employees-container {
-   
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.employee-conteiner {
+    display: flex;
+    justify-content: center;
+    height: 1000px;
+    margin: 20px;
+    flex-wrap: wrap;
+    overflow: scroll;
 }
-.employee-photo img{
+@media (min-width:1000px) {
+    .employee-conteiner {
+        justify-content: space-between;
+    }
+    }
+.employee-conteiner.card {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+}
+@media (min-width:1000px) {
+    .employee-conteiner .card {
+        width: 48%;
+        display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 400px;
+
+    }
+}
+@media (min-width:1500px) {
+    .employee-conteiner .card {
+        width: 31.333%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 400px;
+
+    }
+}
+.employee-conteiner .employee-photo img {
     width: 200px;
-    height: auto;
+    height: 200px;
+    object-fit: cover; /* Додаємо object-fit для відповідного розміщення зображення */
 }
 
-.block-25 img{
+.employee-info-full.hidden{
+    overflow: hidden;
+    max-height: 0px; /* Початкова висота нуль, щоб збільшити блок під час розкривання */
+    transition: all 0.5s ease-in-out; /* Плавний перехід для висоти і opacity */
+}
+
+/* Показати блок з детальною інформацією, коли він активний */
+.employee-info-full.active {
     display: block;
-    max-width: 80%;
-    margin: 20px auto;
+    max-height: 200px; /* Встановлюємо auto, щоб блок займав відповідну висоту вмісту */
+    transition: all 0.5s ease-in-out; /* Плавний перехід для висоти і opacity */
 }
-
-.block-25-h2 {
-    font-size: 18px;
-    text-align: center;
+.employee-info-full {
+    margin: 10px;
+    border-bottom: 2px solid var(--submenu-background-color);
 }
-
-.block-25 h3 {
-    font-size: 14px;
-    text-align: center;
+.employee-conteiner .big__h2 {
+font-size: 24px;
+text-align: left;
+margin: 10px 0px;
+padding: 0;
 }
-
-#elastic {
-    display: block;
-    margin: 40px 0;
-}
-.text-center {
-    text-align: center;
-}
-
-.elastic li{
-    transition: all ease 500ms;
-}
-
-.elastic li.hide {
-    display: none;
-}
-
-mark {
-    background: pink;
-}
-
-.button-success a {
-    color: #fff;
-    text-decoration: none;
+.employee-conteiner .btn-wrapper {
+    margin: 10px 0px;
 }
