@@ -11,7 +11,7 @@ fetch('json/file.json')
             const lastName = fullName.split(" ")[0];
             
             // Створення URL для фотографії
-            let photoSrc = `../img/employee/${lastName}.jpg`;
+            let photoSrc = `img/employee/${lastName}.jpg`;
             let imgElement = new Image();
             imgElement.onload = function() {
                 // Фото з розширенням .jpg знайдено
@@ -19,7 +19,7 @@ fetch('json/file.json')
             };
             imgElement.onerror = function() {
                 // Фото з розширенням .jpg відсутнє, спробуємо використати .png
-                photoSrc = `../img/employee/${lastName}.png`;
+                photoSrc = `img/employee/${lastName}.png`;
                 let imgElementPng = new Image();
                 imgElementPng.onload = function() {
                     // Фото з розширенням .png знайдено
@@ -27,7 +27,7 @@ fetch('json/file.json')
                 };
                 imgElementPng.onerror = function() {
                     // Фото з розширенням .png відсутнє, спробуємо використати .jfif
-                    photoSrc = `../img/employee/${lastName}.jfif`;
+                    photoSrc = `img/employee/${lastName}.jfif`;
                     let imgElementJfif = new Image();
                     imgElementJfif.onload = function() {
                         // Фото з розширенням .jfif знайдено
@@ -35,7 +35,7 @@ fetch('json/file.json')
                     };
                     imgElementJfif.onerror = function() {
                         // Фото з розширенням .jfif відсутнє, використаємо фото за замовчуванням
-                        photoSrc = `../img/employee/default.jpg`;
+                        photoSrc = `img/employee/default.jpg`;
                         appendCard(photoSrc, employee);
                     };
                     imgElementJfif.src = photoSrc;
