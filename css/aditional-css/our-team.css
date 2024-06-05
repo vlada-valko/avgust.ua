@@ -20,6 +20,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px; /* Однакові відступи для всіх сторін */
+    padding: 20px;
 }
 .employee-info, .employee-info-full{
     display: flex;
@@ -125,7 +126,7 @@ mark {
 }
 
 .active-search-card {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);}
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);}
 
 .hide {
     display: none;
