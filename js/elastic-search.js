@@ -1,5 +1,4 @@
-
-
+$(document).ready(function() {
     // Отримуємо дані через fetch
     fetch('json/file.json')
         .then(response => response.json())
@@ -9,7 +8,7 @@
             data.forEach(employee => {
                 const listItem = document.createElement('li');
                 const className = employee["П.І.Б"].replace(/\s+/g, '-').replace(/[^\w-]/g, '').toLowerCase();
-                listItem.className = className;
+                listItem.className = 'hide'; // Застосовуємо клас "hide" до всіх елементів
 
                 const link = document.createElement('a');
                 const lastName = employee["П.І.Б"].split(" ")[0];
@@ -19,11 +18,6 @@
                 listItem.appendChild(link);
                 listContainer.appendChild(listItem);
             });
-
-            // Всю вашу логіку тут (обробка подій, пошук і т.д.)
-            $('.elastic').addClass('hide');
-            
-      
 
             var lastActiveElement = null;
 
@@ -45,20 +39,23 @@
         })
         .catch(error => console.error('Помилка:', error));
 
-        $('#elastic').on('input', function() {
-            var val = $(this).val().trim().toLowerCase();
-            var elasticItems = $('.elastic li a');
-            if (val != '') {
-                elasticItems.each(function(index) {
-                    if ($(this).text().toLowerCase().search(val) == -1) {
-                        $(this).addClass('hide');
-                    } else {
-                        $(this).removeClass('hide');
-                    }
-                });
+    $('#elastic').on('input', function() {
+        var val = $(this).val().trim().toLowerCase();
+        var elasticItems = $('.elastic li');
+
+        // Якщо інпут порожній, застосовуємо клас "hide" до всіх елементів
+        if (val === '') {
+            elasticItems.addClass('hide');
+            return; // Завершуємо функцію, щоб уникнути подальшого виконання коду
+        }
+
+        // Інакше застосовуємо клас "hide" відповідно до результатів пошуку
+        elasticItems.each(function(index) {
+            if ($(this).text().toLowerCase().indexOf(val) === -1) {
+                $(this).addClass('hide');
             } else {
-                elasticItems.each(function(index) {
-                    $(this).removeClass('hide');
-                });
+                $(this).removeClass('hide');
             }
         });
+    });
+});

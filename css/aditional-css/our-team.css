@@ -112,3 +112,7 @@ mark {
 .active-search-card {
     border: 1px solid red;
 }
+
+.hide {
+    display: none;
+}
