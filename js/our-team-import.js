@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     cards.push(cardHTML);
                     if (cards.length === data.length) {
                         container.innerHTML = cards.join("");
-
                         // Додавання обробника подій до кожного посилання
                         var toggleLinks = document.querySelectorAll(".team-active");
                         toggleLinks.forEach(function(link) {

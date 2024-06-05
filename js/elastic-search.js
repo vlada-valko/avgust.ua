@@ -56,6 +56,17 @@ $(document).ready(function() {
             } else {
                 $(this).removeClass('hide');
             }
+            
         });
     });
 });
+
+function clearInput() {
+    var input = document.getElementById("elastic");
+    input.value = ""; // Очищаємо вміст поля вводу
+    $('.elastic li').addClass('hide'); // Додаємо клас "hide" до всіх елементів списку
+}
+
+// Викликаємо функцію clearInput при кліку на кнопку
+document.querySelector(".clear-button").addEventListener("click", clearInput);
+

@@ -1,3 +1,19 @@
+
+fetch("json/file.json")
+    .then((response) => response.json())
+    .then((data) => {
+        const lengthJson = data.length;
+        console.log(lengthJson);
+
+        const empCounter = document.querySelector(".emp-counter");
+        empCounter.dataset.count = lengthJson;
+    })
+const yearofWork = new Date().getFullYear();
+
+const yearCounter = document.querySelector(".yearofWork");
+const StartYear = 2000;
+yearCounter.dataset.count = yearofWork - StartYear;
+
 $(document).ready(function() {
     function isScrolledIntoView(elem) {
         var docViewTop = $(window).scrollTop();
@@ -30,3 +46,5 @@ $(document).ready(function() {
         });
     });
 });
+
+
