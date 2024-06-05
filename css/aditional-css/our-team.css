@@ -83,7 +83,7 @@ padding: 0;
     text-align: center;
 }
 
-#elastic {
+.elastic.li-active {
     display: block;
     margin: 40px 0;
 }
@@ -96,7 +96,7 @@ padding: 0;
     transition: all ease 500ms;
 }
 
-.elastic li.hide {
+.elastic.hide {
     display: none;
 }
 
@@ -107,4 +107,8 @@ mark {
 .button-success a {
     color: #fff;
     text-decoration: none;
+}
+
+.active-search-card {
+    border: 1px solid red;
 }

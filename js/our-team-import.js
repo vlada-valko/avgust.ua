@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 function appendCard(photoSrc, employee) {
                     var cardHTML = `
-                        <div class="card">
+                        <div class="card" id="${lastName}" >
                             <div class="employee-photo">
                                 <img src="${photoSrc}" alt="Фото ${employee["П.І.Б"]}">
                             </div>
