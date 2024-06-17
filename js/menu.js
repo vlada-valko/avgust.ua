@@ -26,6 +26,22 @@ const btnTextClasses = [".menu-btn-about-company-text", ".menu-btn-department-te
 const btnArrowClasses = [".menu-arrow-about-company", ".menu-arrow-department", ".menu-arrow-information", ".menu-arrow-education"];
 
 const toClose = [".submenu__about-company", ".submenu__department", ".submenu__information", ".submenu__education", ".nav-list__item-dont-close"];
+
+// Функція для оновлення висоти підменю
+function updateSubmenuHeight() {
+  // Отримуємо підменю, які відображені
+  const visibleSubmenus = document.querySelectorAll('.submenu__visible');
+
+  // Рахуємо висоту підменю
+  const submenuHeight = (visibleSubmenus.length * 115) + 'px';
+
+  // Зберігаємо висоту підменю в змінну для подальшого використання
+  submenuClasses.forEach((classItem) => {
+    const submenu = document.querySelector(classItem);
+    submenu.style.setProperty('--submenu-height', submenuHeight);
+  });
+}
+
 // Проходимось по кожному елементу масиву кнопок меню і додаємо подію click
 menuBtnClasses.forEach((menuBtnClass, index) => {
   const menuBtn = document.querySelector(menuBtnClass);
@@ -53,32 +69,33 @@ menuBtnClasses.forEach((menuBtnClass, index) => {
     // Додаємо або знімаємо клас "submenu__visible" відповідно до потрібного підменю, btnText та btnArrow
     submenu.classList.toggle("submenu__visible");
     btnTextElements.forEach((textElement) => {
+      updateSubmenuHeight();
       textElement.classList.toggle("submenu__visible");
     });
     btnArrowElements.forEach((arrowElement) => {
+      updateSubmenuHeight();
       arrowElement.classList.toggle("submenu__visible");
     });
+
+    // Оновлюємо висоту підменю
+    updateSubmenuHeight();
   });
 });
 
-
 toClose.forEach((link) => {
-console.log(link);
-})
-
-
-
-
+  console.log(link);
+});
 
 const links = document.querySelectorAll('.submenu__about-company a, .submenu__department a, .submenu__information a, .submenu__education a, .nav-list__item-dont-close a');
 
 // Додаємо обробник подій для кожного посилання
 links.forEach(link => {
-    link.addEventListener('click', () => {
-        // Змінюємо клас body при кліку на посилання
-        document.body.classList.remove('overflow-hidden');
-        headerNavMenu.classList.remove("nav-visible");
-  burgerLine.classList.remove("nav-visible");
-  wrapper.classList.remove("nav-visible");
-    });
+  link.addEventListener('click', () => {
+    // Змінюємо клас body при кліку на посилання
+    document.body.classList.remove('overflow-hidden');
+    headerNavMenu.classList.remove("nav-visible");
+    burgerLine.classList.remove("nav-visible");
+    wrapper.classList.remove("nav-visible");
+    submenuHeight = 0;
+  });
 });

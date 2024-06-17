@@ -70,10 +70,10 @@
 font-size: 24px;
 text-align: center;
 margin: 10px 0px;
-padding: 0;
 }
 .employee-conteiner .btn-wrapper {
     margin: 10px 0px;
+    max-width: 90%;
 }
 .block-25 img {
     display: block;

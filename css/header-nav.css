@@ -195,23 +195,19 @@
 
 .submenu__about-company.submenu__visible,
 .submenu__information.submenu__visible,
-.submenu__education.submenu__visible {
+.submenu__education.submenu__visible,
+.submenu__department.submenu__visible,
+.submenu__information.submenu__visible ,
+.submenu__education.submenu__visible
+ {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 230px;
+  height: var(--submenu-height);
   transition: all 0.3s ease-in-out;
 }
-.submenu__department.submenu__visible {
-  height: 250px;
-}
-.submenu__information.submenu__visible {
-  height: 200px;
-}
-.submenu__education.submenu__visible {
-  height: 100px;
-}
+
 
 @media (min-width: 1000px) {
   .submenu__about-company,
