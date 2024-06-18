@@ -181,3 +181,10 @@ h1, h2, h3 {
     font-size: 48px;
   }
 }
+
+.aditional__banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
