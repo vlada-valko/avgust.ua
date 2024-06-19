@@ -1,82 +1,90 @@
-.index-main-information {
-  margin-top: 60px;
-  background: url(../img/index/line-background.svg) 0 120px / cover no-repeat;
-}
-.index-main-information-banner {
+.information-page-banner {
   background: url(../img/information/information-banner.jfif) 0 0 / cover
     no-repeat;
   height: 100px;
   padding: 75px 0px;
+  margin-top: 60px;
 }
 @media (min-width: 700px) {
-  .index-main-information-banner {
+  .information-page-banner {
     background: url(../img/information/information-banner.jfif) 0 -200px / cover
       no-repeat;
   }
 }
-.current-working-information {
-  max-width: 100%;
-  padding: 50px 20px;
-}
-@media (min-width: 500px) {
-  .current-working-information {
-    max-width: 60%;
-    margin: auto;
-    padding: 50px 20px;
-  }
+.information-main-information {
+  background: url(../img/index/line-background.svg) 0 0 / cover no-repeat;
 }
 
-.current-working-information {
+.current-working-information{
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
-  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0px;
 }
-@media (min-width: 500px) {
-  .current-working-information {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
+.current-working-information-text {
+  width: 80%;
 }
-.current-working-information__schedules h2 {
+
+.current-working-information-img {
+  width: 80%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+.current-working-information-text .small__h2 {
   border-bottom: 1px solid var(--title-text-color);
-  min-width: 100%;
+  width: 100%;
   padding-bottom: 20px;
 }
-.current-working-information__meeting-schedule-item {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: repeat(2, 1fr);
-  margin: 0px 50px -50px 0px;
-}
+@media (min-width: 800px) {
+  .current-working-information {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 800px;
+  }
 
-.schedule-item__circle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  margin: auto 0px;
-  background: var(--dark-text-color);
-  border-radius: 50%;
+  .current-working-information-img {
+    width: 40%;
+  }
+  .current-working-information-text .small__h2 {
+    width: 80%;
+  }
+}
+.current-working-information-item {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 10% 1fr;
+  justify-content: start;
+  column-gap: 40px;
+  margin: 20px auto 20px;
+}
+@media (min-width: 800px) {
+  .current-working-information-item {
+    column-gap: 20px;
+  }
+}
+.card__circle {
+  transform: none;
+  margin: 50% 0px;
   grid-row: span 2;
 }
-.schedule-item__circle img {
-  width: 65%;
-  height: auto;
+@media (min-width: 800px) {
+  .card__circle {
+    margin: auto 0px;
+  }
 }
-.current-working-information__meeting-schedule-item p {
-  display: inline;
-  font-size: 26px;
-  margin-bottom: 10px;
+.current-working-information-item p {
+  color: var(--dark-text-color);
+  font-size: 28px;
+  font-weight: 400;
+  font-family: "Philosopher", sans-serif;
+  width: fit-content;
+  margin-bottom: 15px;
 }
-.current-working-information-img {
- width: 65%;
-  height: 400px;
-  background: url(../img/information/information-work-info-img.png) 0 0 / cover no-repeat;
+@media (min-width: 800px) {
+  .current-working-information-item p {
+    margin-bottom: 10px;
+  }
 }
-
