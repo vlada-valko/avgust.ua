@@ -100,3 +100,108 @@
   max-width: 70px;
   height: auto;
 }
+.events__row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  .events__row {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+  }
+}
+
+.events__item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+@media (min-width: 800px) {
+  .events__item {
+    max-width: 25%;
+  }
+}
+.events__item img {
+  width: 50%;
+  height: 200px; 
+  object-fit: cover; 
+  margin-bottom: 15px; 
+}
+@media (min-width:800px) {
+  .events__item img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    margin-bottom: 15px; 
+  }
+}
+.events__item__title {
+  color: var(--dark-text-color);
+  font-size: 28px;
+  font-weight: 400;
+  font-family: "Philosopher", sans-serif;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+.events__item__text {
+  font-family: "Albert Sans", sans-serif;
+  font-size: 17px;
+  color: var(--title-text-color);
+  margin-bottom: 15px;
+}
+
+.informations__vacancies {
+  background: var(--our-team-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width:800px) {
+  .informations__vacancies {
+    background: var(--our-team-background);
+    display: flex;
+    flex-direction: row;
+  }
+}
+.informations__vacancies-block {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0px;
+}
+.informations__vacancies .big__h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
+}
+.informations__vacancies .big__h2 img {
+  max-width: 70px;
+  height: auto;
+}
+.informations__vacancies img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+@media (min-width:800px) {
+.informations__vacancies img {
+  width: 65%;
+  max-height: 350px;
+  height: 100%;
+  object-fit: cover;
+}
+}

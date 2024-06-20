@@ -1,0 +1,17 @@
+.corporatives-body {
+  margin-top: 60px;
+  background: url(../../img/index/line-background.svg) 0 0 / cover no-repeat;
+}
+.corporatives-body .slider__item {
+  position: relative;
+  padding: 0px 15px;
+  margin-right: 10px;
+  background: none;
+  height: var(--max-slider-height);
+  height: 300px;
+}
+.corporatives-body .slider__item img {
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+}
