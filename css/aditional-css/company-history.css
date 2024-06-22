@@ -1,0 +1,21 @@
+.company-history {
+  margin-top: 60px;
+  background: url(../../img/index/line-background.svg) 0 0 / cover no-repeat;
+}
+.company-story-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+@media (min-width:800px) {
+    .company-story-row {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        margin: auto;
+    }
+    .story-item {
+        width: 33.333%;
+    }
+}
