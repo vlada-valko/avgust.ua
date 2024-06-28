@@ -6,7 +6,7 @@ function init() {
   import("./counter.js");
   import("./our-culture-accordeon.js");
   import("./elastic-search.js");
-
+  import("./count_sum.js");
 
 }
 
