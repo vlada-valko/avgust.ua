@@ -1,0 +1,13 @@
+
+.education-page-banner {
+     background: url(../../img/education/banner.jpg) 0 0px / cover no-repeat;
+   height: 100px;
+   padding: 75px 0px;
+   margin-top: 60px;
+}
+@media (min-width: 850px) {
+    .education-page-banner {
+        background: url(../../img/education/banner.jpg) 0 -400px / cover no-repeat;
+
+    }
+  }

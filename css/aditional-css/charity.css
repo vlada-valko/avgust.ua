@@ -9,3 +9,13 @@
     flex-direction: column;
     align-items: center;
 }
+.charity-body{
+    margin-top: 60px;
+    background: url(../../img/charity/charity-img.jfif) 0 0 / cover no-repeat;
+    height: calc(100vh - 60px);
+}
+.total-sum {
+    width: fit-content;
+    margin:50px auto;
+
+}
