@@ -75,18 +75,60 @@
     background-color: #fff;
     display: none;
     margin-left: 25px;
-    
+    width: 80%;
+    margin: auto;
 
+  }
+  .content p {
+    padding: 10px 15px;
+    margin: auto;
+    color: #333;
+    max-width: 90%;
+    text-align: center;
+  }
+/* Default styles */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 800px) {
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.content-wrapper p {
+  width: 400px;
+  text-wrap: wrap;
+  margin: 5px auto;
+}
+
+.content-btns {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+@media(min-width:800px){
+  .content-btns {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
   }
   .content p {
     padding: 10px 15px;
     margin: 0;
     color: #333;
+    max-width: 90%;
+    text-align: left;
   }
-  .content-wrapper {
-    display: flex;
-  }
-
+}
+.content-btns a {
+  color: var(--dark-text-color);
+}
   .fa-plus::before {
     background: url(../../img/menu/arrow-down.png) 0 0 / cover no-repeat;
     content: "";
@@ -125,12 +167,13 @@
     display: flex;
     align-items: center;
     margin-left: 20px;
-
   }
+  @media (min-width: 800px) {
+    
 .education__buttons::after {
   content: '';
   position: absolute;
-  top: 6px;
+  top: -2px;
   left: 0;
   width: 0%;
   height: 1px;
@@ -145,7 +188,7 @@
 .education__buttons::before {
   content: '';
   position: absolute;
-  bottom:  6px;
+  bottom:  -2px;
   right: 0;
   width: 0%;
   height: 1px;
@@ -153,12 +196,10 @@
   transition: all 0.3s ease-in-out;
 }
 .education__buttons:hover:before {
-  content: '';
-  position: absolute;
-  bottom:  6px;
-  right: 0;
   width: 100%;
-  height: 1px;
-  background: var(--accent-text-color);
   transition: all 0.3s ease-in-out;
 }
+  }
+  .education-body .index__our-values__carousel-title {
+    font-size: 18px;
+  }
