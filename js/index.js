@@ -4,10 +4,9 @@ function init() {
   import("./menu.js");
   import("./index.carousel.js");
   import("./counter.js");
-  import("./our-culture-accordeon.js");
   import("./elastic-search.js");
   import("./count_sum.js");
-
+  
 }
 
 
@@ -18,3 +17,5 @@ document.body.addEventListener('htmx:afterOnLoad', () => {
     loadedPartialsCount++;
     if (loadedPartialsCount === totalPartials) init();
 });
+
+

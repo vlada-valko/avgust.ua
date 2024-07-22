@@ -10,11 +10,12 @@
     </title>
     <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/education-css/education.css">
+    <link rel="stylesheet" href="css/aditional-css/education.css">
     <script src="https://unpkg.com/htmx.org@1.9.10"
         integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
         crossorigin="anonymous"></script>
 </head>
+
 <body class="education-body">
     <header>
         <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
@@ -23,16 +24,51 @@
         <div class="education-page-banner aditional__banner">
             <h1 class="aditional__h1">Навчання</h1>
         </div>
-        
+        <div class="accordion-container">
+            <div class="set">
+              <a href="#">
+                ЗАГАЛЬНА ІНФОРМАЦІЯ О КОМПАНІЇ
+                <i class="fa-plus"></i>
+              </a>
+              <div class="content">
+                <div class="content-wrapper">
+                <p>Історія компанії</p>
+                <a class="education__buttons" href="#">Ознайомитись</a>
+                <a class="education__buttons" href="#">Завантажити</a>
+
+            </div>
+              </div>
+              <div class="content">
+                <div class="content-wrapper">
+                <p>Історія компанії</p>
+                <a class="education__buttons" href="#">Ознайомитись</a>
+                <a class="education__buttons" href="#">Завантажити</a>
+
+            </div>
+              </div>
+              <div class="content">
+                <div class="content-wrapper">
+                <p>Історія компанії</p>
+                <a class="education__buttons" href="#">Ознайомитись</a>
+                <a class="education__buttons" href="#">Завантажити</a>
+
+            </div>
+              </div>
+            </div>
+          </div>
+
+
     </section>
     <footer>
-       <!-- <footer data-hx-trigger="load" data-hx-swap="outerHTML" 
+        <!-- <footer data-hx-trigger="load" data-hx-swap="outerHTML" 
         data-hx-get="footer.partial.html"></footer>-->
 
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="js/slick.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/education-accordeon.js"></script>
+
 
 </body>
 
