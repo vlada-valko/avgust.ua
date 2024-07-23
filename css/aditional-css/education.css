@@ -12,8 +12,9 @@
 }
 
 .accordion-container {
+  background: url(../../img/index/line-background.svg) 0 0 / cover no-repeat;
   position: relative;
-  height: auto;
+  height: 100vh;
   margin: auto;
 }
 
@@ -206,7 +207,11 @@
 .education-body .content .index__our-values__carousel-title {
   border-bottom: none;
 }
-
+@media (min-width:800px) {
+  .education-body .content .index__our-values__carousel-title {
+    width: 45%;
+  }
+}
 .investment-content {
   display: none;
   align-items: center;
@@ -246,4 +251,6 @@
   height: 20px;
   margin-right: 5px;
 }
-
+.content {
+  background: none;
+}
