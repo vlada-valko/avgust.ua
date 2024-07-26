@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Information</title>
+    <link rel="stylesheet" href="path_to_your_styles.css">
+</head>
+<body>
+    <div class="set" id="informationSet">
+        <!-- Blocks will be generated here -->
+    </div>
+
+    <script>
+        // GitHub repository details
+        const username = 'vlada-valko';
+        const repo = 'avgust.ua';
+        const path = 'documents/education/about-paper'; // Path to the folder in your repo
+
+        // GitHub API URL to get the contents of the folder
+        const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+
+        // Fetch the list of files from the GitHub API
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(files => {
+                files.forEach(file => {
+                    if (file.type === 'file') {
+                        addNewContentBlock(file.name, file.download_url);
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching files:', error));
+
+        // Function to add new content block
+        function addNewContentBlock(fileName, filePath) {
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'content';
+
+            const contentWrapperDiv = document.createElement('div');
+            contentWrapperDiv.className = 'content-wrapper';
+
+            const titleParagraph = document.createElement('p');
+            titleParagraph.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
+
+            const imgElement = document.createElement('img');
+            imgElement.src = '';
+            imgElement.alt = '';
+
+            const titleText = document.createTextNode(fileName);
+
+            const btnsDiv = document.createElement('div');
+            btnsDiv.className = 'content-btns';
+
+            const viewLink = document.createElement('a');
+            viewLink.className = 'education__buttons';
+            viewLink.href = filePath;
+            viewLink.target = '_blank';
+            viewLink.innerText = 'Ознайомитись';
+
+            const downloadLink = document.createElement('a');
+            downloadLink.className = 'education__buttons';
+            downloadLink.href = filePath;
+            downloadLink.download = '';
+            downloadLink.innerText = 'Завантажити';
+
+            titleParagraph.appendChild(imgElement);
+            titleParagraph.appendChild(titleText);
+
+            btnsDiv.appendChild(viewLink);
+            btnsDiv.appendChild(downloadLink);
+
+            contentWrapperDiv.appendChild(titleParagraph);
+            contentWrapperDiv.appendChild(btnsDiv);
+
+            contentDiv.appendChild(contentWrapperDiv);
+
+            document.getElementById('informationSet').appendChild(contentDiv);
+        }
+    </script>
+</body>
+</html>
