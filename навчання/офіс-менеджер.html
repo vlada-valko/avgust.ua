@@ -9,6 +9,21 @@
     <div id="content-container"></div>
 
     <script>
+fetch('https://api.github.com/repos/vlada-valko/avgust.ua/contents/documents/education/офіс-менеджер')
+    .then(response => {
+        console.log('Rate limit headers:', {
+            limit: response.headers.get('X-RateLimit-Limit'),
+            remaining: response.headers.get('X-RateLimit-Remaining'),
+            reset: response.headers.get('X-RateLimit-Reset')
+        });
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data:', data);
+    })
+    .catch(error => console.error('Error:', error));
+
+
         // GitHub repository details
         const username = 'vlada-valko';
         const repo = 'avgust.ua';
