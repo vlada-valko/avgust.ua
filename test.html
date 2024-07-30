@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Information</title>
-    <link rel="stylesheet" href="path_to_your_styles.css">
+    <title>GitHub Files</title>
 </head>
 <body>
-    <div class="set" id="informationSet">
-        <!-- Blocks will be generated here -->
-    </div>
+    <div id="content-container"></div>
 
     <script>
         // GitHub repository details
         const username = 'vlada-valko';
         const repo = 'avgust.ua';
-        const path = 'documents/education/about-paper'; // Path to the folder in your repo
+        const path = 'documents/education/загальна інформація про компанію'; // Path to the folder in your repo
+        const folderName = 'Загальна інформація про компанію'; // Folder name to be displayed
 
         // GitHub API URL to get the contents of the folder
         const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
 
         // Fetch the list of files from the GitHub API
         fetch(apiUrl)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(files => {
+                // Create the folder block once at the top
+                createFolderBlock(folderName);
                 files.forEach(file => {
                     if (file.type === 'file') {
                         addNewContentBlock(file.name, file.download_url);
@@ -32,51 +37,61 @@
             })
             .catch(error => console.error('Error fetching files:', error));
 
-        // Function to add new content block
-        function addNewContentBlock(fileName, filePath) {
+        function createFolderBlock(folderName) {
+            const contentContainer = document.getElementById('content-container');
+
+            const setDiv = document.createElement('div');
+            setDiv.className = 'set';
+
+            const titleLink = document.createElement('a');
+            titleLink.className = 'index__our-values__carousel-title';
+            titleLink.href = 'javascript:void(0);';
+            titleLink.innerHTML = `${folderName} <i class="fa fa-plus"></i>`;
+            titleLink.addEventListener('click', () => {
+                contentDiv.style.display = contentDiv.style.display === 'none' ? 'block' : 'none';
+            });
+
             const contentDiv = document.createElement('div');
             contentDiv.className = 'content';
+            contentDiv.id = 'folder-content'; // Set ID for later use
+
+            setDiv.appendChild(titleLink);
+            setDiv.appendChild(contentDiv);
+            contentContainer.appendChild(setDiv);
+        }
+
+        function addNewContentBlock(fileName, fileUrl) {
+            const contentDiv = document.getElementById('folder-content');
 
             const contentWrapperDiv = document.createElement('div');
             contentWrapperDiv.className = 'content-wrapper';
 
-            const titleParagraph = document.createElement('p');
-            titleParagraph.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
+            const fileTitle = document.createElement('p');
+            fileTitle.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
+            fileTitle.innerHTML = `<img src="" alt="">${fileName}`;
 
-            const imgElement = document.createElement('img');
-            imgElement.src = '';
-            imgElement.alt = '';
+            const contentBtnsDiv = document.createElement('div');
+            contentBtnsDiv.className = 'content-btns';
 
-            const titleText = document.createTextNode(fileName);
+            const viewButton = document.createElement('a');
+            viewButton.className = 'education__buttons';
+            viewButton.href = fileUrl;
+            viewButton.target = '_blank';
+            viewButton.textContent = 'Ознайомитись';
 
-            const btnsDiv = document.createElement('div');
-            btnsDiv.className = 'content-btns';
+            const downloadButton = document.createElement('a');
+            downloadButton.className = 'education__buttons';
+            downloadButton.href = fileUrl;
+            downloadButton.download = '';
+            downloadButton.textContent = 'Завантажити';
 
-            const viewLink = document.createElement('a');
-            viewLink.className = 'education__buttons';
-            viewLink.href = filePath;
-            viewLink.target = '_blank';
-            viewLink.innerText = 'Ознайомитись';
-
-            const downloadLink = document.createElement('a');
-            downloadLink.className = 'education__buttons';
-            downloadLink.href = filePath;
-            downloadLink.download = '';
-            downloadLink.innerText = 'Завантажити';
-
-            titleParagraph.appendChild(imgElement);
-            titleParagraph.appendChild(titleText);
-
-            btnsDiv.appendChild(viewLink);
-            btnsDiv.appendChild(downloadLink);
-
-            contentWrapperDiv.appendChild(titleParagraph);
-            contentWrapperDiv.appendChild(btnsDiv);
-
+            contentBtnsDiv.appendChild(viewButton);
+            contentBtnsDiv.appendChild(downloadButton);
+            contentWrapperDiv.appendChild(fileTitle);
+            contentWrapperDiv.appendChild(contentBtnsDiv);
             contentDiv.appendChild(contentWrapperDiv);
-
-            document.getElementById('informationSet').appendChild(contentDiv);
         }
     </script>
+    
 </body>
 </html>
