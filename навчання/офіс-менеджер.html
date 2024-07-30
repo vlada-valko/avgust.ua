@@ -12,19 +12,19 @@
         // GitHub repository details
         const username = 'vlada-valko';
         const repo = 'avgust.ua';
+        
         function getCurrentFilePath() {
-    const path = window.location.pathname; // Отримати шлях поточної URL
-    const fileName = path.substring(path.lastIndexOf('/') + 1); // Видобути ім'я файлу
-    return decodeURIComponent(fileName.split('.')[0].toLowerCase()); // Видалити розширення, декодувати і перевести в нижній регістр
-}
+            const path = window.location.pathname; // Отримати шлях поточної URL
+            const fileName = path.substring(path.lastIndexOf('/') + 1); // Видобути ім'я файлу
+            return decodeURIComponent(fileName.split('.')[0].toLowerCase()); // Видалити розширення, декодувати і перевести в нижній регістр
+        }
 
-// Отримати ім'я файлу
-const fileName = getCurrentFilePath();
+        // Отримати ім'я файлу
+        const fileName = getCurrentFilePath();
 
-// Кореневий шлях до папки, що містить підпапки, обчислений динамічно
-const rootPath = `documents/education/${fileName}`;
-console.log(rootPath);
-
+        // Кореневий шлях до папки, що містить підпапки, обчислений динамічно
+        const rootPath = `documents/education/${fileName}`;
+        console.log(rootPath);
 
         // GitHub API URL to get the contents of the root folder
         const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
@@ -115,6 +115,5 @@ console.log(rootPath);
             contentContainer.appendChild(setDiv);
         }
     </script>
-    
 </body>
 </html>
