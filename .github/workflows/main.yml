@@ -1,7 +1,5 @@
 name: main
 
-name: Example Workflow
-
 on:
   push:
     branches:
