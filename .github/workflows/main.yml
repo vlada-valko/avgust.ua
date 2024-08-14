@@ -16,3 +16,4 @@ jobs:
       - name: Fetch data from GitHub API
         run: |
           curl -H "Authorization: token ${{ secrets.FOR_AVGUST }}" https://api.github.com/user
+
