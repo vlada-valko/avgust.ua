@@ -1,0 +1,18 @@
+name: main
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Fetch data from GitHub API
+      run: |
+        curl -H "Authorization: token ${{ secrets.FOR_AVGUST }}" \
+             https://api.github.com/repos/${{ github.repository }}/contents/
+      env:
+        GITHUB_TOKEN: ${{ secrets.FOR_AVGUST}}
