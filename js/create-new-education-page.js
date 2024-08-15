@@ -1,10 +1,9 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
-const githubToken = process.env.GITHUB_TOKEN; // Зчитування токена з змінної середовища
+const githubToken = process.env.GITHUB_TOKEN;
 
-// Функція для отримання даних з кешем
 async function fetchWithCache(url) {
     try {
         const response = await fetch(url, {
@@ -18,7 +17,6 @@ async function fetchWithCache(url) {
     }
 }
 
-// Функція для створення HTML-сторінки для папки
 async function createPageForFolder(folderName) {
     const template = `
     <!DOCTYPE html>
@@ -53,13 +51,12 @@ async function createPageForFolder(folderName) {
     await savePage(`${folderName}.html`, template);
 }
 
-// Функція для збереження HTML-сторінки на GitHub
 async function savePage(fileName, content) {
     const url = `https://api.github.com/repos/${username}/${repo}/contents/documents/education/${fileName}`;
 
     const data = {
         message: `Create ${fileName}`,
-        content: Buffer.from(content).toString('base64'), // Заміна btoa
+        content: Buffer.from(content).toString('base64'),
         branch: 'main'
     };
 
@@ -83,7 +80,6 @@ async function savePage(fileName, content) {
     }
 }
 
-// Функція для перевірки наявності HTML-сторінки на GitHub
 async function checkIfPageExists(folderName) {
     const url = `https://api.github.com/repos/${username}/${repo}/contents/documents/education/${folderName}.html`;
 
@@ -93,33 +89,32 @@ async function checkIfPageExists(folderName) {
                 'Authorization': `token ${githubToken}`
             }
         });
-        return response.ok; // Перевірка статусу відповіді
+        return response.ok;
     } catch {
         return false;
     }
 }
 
-// Основна функція для перевірки папок і створення сторінок
 async function processFolders() {
     try {
         const items = await fetchWithCache(`https://api.github.com/repos/${username}/${repo}/contents/documents/education`);
-        const folders = items.filter(item => item.type === 'dir');
 
-        for (const folder of folders) {
-            const folderApiUrl = `https://api.github.com/repos/${username}/${repo}/contents/documents/education/${folder.name}`;
-            const pageExists = await checkIfPageExists(folder.name);
+        if (Array.isArray(items)) {
+            const folders = items.filter(item => item.type === 'dir');
 
-            if (!pageExists) {
-                await createPageForFolder(folder.name);
+            for (const folder of folders) {
+                const pageExists = await checkIfPageExists(folder.name);
+
+                if (!pageExists) {
+                    await createPageForFolder(folder.name);
+                }
             }
-
-            // Додайте реалізацію fetchFilesForFolder тут, якщо необхідно
-            // await fetchFilesForFolder(folderApiUrl, folder.name);
+        } else {
+            console.error('Error: Expected an array of items but received:', items);
         }
     } catch (error) {
         console.error('Error processing folders:', error);
     }
 }
 
-// Запуск основної функції
 processFolders();
