@@ -1,0 +1,29 @@
+name: Auto Create Pages
+
+on:
+  push:
+    paths:
+      - 'documents/education/**'
+    branches:
+      - 'main'
+
+jobs:
+  create-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script to create pages
+        run: node js/create-new-education-page.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.FOR_AVGUST }}

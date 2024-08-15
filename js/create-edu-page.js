@@ -97,7 +97,7 @@ function createFolderBlock(folderName, files) {
 
             const fileTitle = document.createElement('p');
             fileTitle.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
-            fileTitle.innerHTML = `<img src="" alt="">${file.name}`;
+            fileTitle.innerHTML = `<img src="../img/education/${file.name}" alt="">${file.name}`;
 
             const contentBtnsDiv = document.createElement('div');
             contentBtnsDiv.className = 'content-btns';

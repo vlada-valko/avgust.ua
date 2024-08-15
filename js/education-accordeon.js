@@ -42,16 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         switch (fileExtension) {
             case 'pdf':
-                imgSrc = 'img/education/pdf.png'; // Переконайтеся, що шлях правильний
+                imgSrc = '../img/education/pdf.png'; // Переконайтеся, що шлях правильний
                 break;
             case 'mp4':
-                imgSrc = 'img/education/video.png'; // Переконайтеся, що шлях правильний
+                imgSrc = '../img/education/video.png'; // Переконайтеся, що шлях правильний
                 break;
             case "html":
-                imgSrc = 'img/education/link.png'; // Переконайтеся, що шлях правильний
+                imgSrc = '../img/education/link.png'; // Переконайтеся, що шлях правильний
                 break;
             default:
-                imgSrc = 'img/education/default.png'; // Переконайтеся, що шлях правильний
+                imgSrc = '../img/education/default.png'; // Переконайтеся, що шлях правильний
                 break;
         }
 
