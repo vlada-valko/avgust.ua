@@ -1,11 +1,7 @@
-name: Run Node.js Script on Push
+name: Run Node.js Script Manually
 
 on:
-  push:
-    paths:
-      - 'documents/education/**'
-    branches:
-      - 'main'
+  workflow_dispatch:
 
 jobs:
   run-script:
