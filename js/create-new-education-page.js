@@ -1,10 +1,15 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
 
+console.log('GITHUB_TOKEN:', process.env.FOR_AVGUST); // Діагностичний вивід
+
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
-const githubToken = process.env.FOR_AVGUST; // Використовуємо правильну назву секрету
+const githubToken = process.env.FOR_AVGUST; // Використовуємо секрет
 const cacheFile = 'cache.json'; // Файл для кешування
+
+// Далі код як раніше
+
 
 async function fetchWithCache(url) {
     try {
