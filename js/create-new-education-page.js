@@ -1,8 +1,10 @@
 import fetch from 'node-fetch';
+import fs from 'fs';
 
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
-const githubToken = process.env.GITHUB_TOKEN;
+const githubToken = process.env.FOR_AVGUST; // Використовуємо правильну назву секрету
+const cacheFile = 'cache.json'; // Файл для кешування
 
 async function fetchWithCache(url) {
     try {
@@ -15,6 +17,97 @@ async function fetchWithCache(url) {
     } catch (error) {
         console.error('Error fetching data:', error);
     }
+}
+
+async function savePage(fileName, content) {
+    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
+
+    const data = {
+        message: `Create ${fileName}`,
+        content: Buffer.from(content).toString('base64'),
+        branch: 'main'
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `token ${githubToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.content) {
+            console.log(`${fileName} was successfully created.`);
+        } else {
+            console.error(`Failed to create ${fileName}.`, result);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function deletePage(fileName) {
+    const getUrl = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
+    const response = await fetch(getUrl, {
+        headers: {
+            'Authorization': `token ${githubToken}`
+        }
+    });
+    const data = await response.json();
+
+    const deleteUrl = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
+    const deleteData = {
+        message: `Delete ${fileName}`,
+        sha: data.sha,
+        branch: 'main'
+    };
+
+    try {
+        const deleteResponse = await fetch(deleteUrl, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `token ${githubToken}`
+            },
+            body: JSON.stringify(deleteData)
+        });
+        if (deleteResponse.ok) {
+            console.log(`${fileName} was successfully deleted.`);
+        } else {
+            console.error(`Failed to delete ${fileName}.`, await deleteResponse.json());
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function checkIfPageExists(fileName) {
+    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `token ${githubToken}`
+            }
+        });
+        return response.ok;
+    } catch {
+        return false;
+    }
+}
+
+async function getCachedFolders() {
+    if (fs.existsSync(cacheFile)) {
+        const data = fs.readFileSync(cacheFile);
+        return JSON.parse(data);
+    }
+    return [];
+}
+
+async function updateCache(folders) {
+    fs.writeFileSync(cacheFile, JSON.stringify(folders, null, 2));
 }
 
 async function createPageForFolder(folderName) {
@@ -51,72 +144,31 @@ async function createPageForFolder(folderName) {
     await savePage(`${folderName}.html`, template);
 }
 
-async function savePage(fileName, content) {
-    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
-
-    const data = {
-        message: `Create ${fileName}`,
-        content: Buffer.from(content).toString('base64'),
-        branch: 'main'
-    };
-
-    try {
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `token ${githubToken}`
-            },
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-        if (result.content) {
-            console.log(`${fileName} was successfully created.`);
-        } else {
-            console.error(`Failed to create ${fileName}.`, result);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function checkIfPageExists(folderName) {
-    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${folderName}.html`;
-
-    try {
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `token ${githubToken}`
-            }
-        });
-        return response.ok;
-    } catch {
-        return false;
-    }
-}
-
 async function processFolders() {
     try {
         const items = await fetchWithCache(`https://api.github.com/repos/${username}/${repo}/contents/documents/education`);
+        const currentFolders = items.filter(item => item.type === 'dir').map(item => item.name);
 
-        if (Array.isArray(items)) {
-            const folders = items.filter(item => item.type === 'dir');
+        const cachedFolders = await getCachedFolders();
 
-            for (const folder of folders) {
-                const pageExists = await checkIfPageExists(folder.name);
-
-                if (!pageExists) {
-                    await createPageForFolder(folder.name);
-                }
+        // Додати нові або оновити існуючі
+        for (const folder of currentFolders) {
+            if (!cachedFolders.includes(folder)) {
+                await createPageForFolder(folder);
             }
-        } else {
-            console.error('Error: Expected an array of items but received:', items);
         }
+
+        // Видалити старі
+        for (const folder of cachedFolders) {
+            if (!currentFolders.includes(folder)) {
+                await deletePage(`${folder}.html`);
+            }
+        }
+
+        await updateCache(currentFolders);
     } catch (error) {
         console.error('Error processing folders:', error);
     }
 }
 
 processFolders();
-
-console.log(`GITHUB_TOKEN is: ${process.env.GITHUB_TOKEN}`);
