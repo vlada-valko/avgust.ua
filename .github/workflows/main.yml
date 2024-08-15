@@ -1,0 +1,27 @@
+name: Run Node.js Script on Push
+
+on:
+  push:
+    paths:
+      - 'documents/education/**'
+    branches:
+      - 'main'
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run custom script
+      run: node js/create-new-education-page.js
