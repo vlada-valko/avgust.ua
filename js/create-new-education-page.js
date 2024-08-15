@@ -52,7 +52,7 @@ async function createPageForFolder(folderName) {
 }
 
 async function savePage(fileName, content) {
-    const url = `https://api.github.com/repos/${username}/${repo}/contents/documents/education/${fileName}`;
+    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
 
     const data = {
         message: `Create ${fileName}`,
@@ -81,7 +81,7 @@ async function savePage(fileName, content) {
 }
 
 async function checkIfPageExists(folderName) {
-    const url = `https://api.github.com/repos/${username}/${repo}/contents/documents/education/${folderName}.html`;
+    const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${folderName}.html`;
 
     try {
         const response = await fetch(url, {
@@ -118,3 +118,5 @@ async function processFolders() {
 }
 
 processFolders();
+
+console.log(`GITHUB_TOKEN is: ${process.env.GITHUB_TOKEN}`);

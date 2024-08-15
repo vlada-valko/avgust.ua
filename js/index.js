@@ -18,4 +18,5 @@ document.body.addEventListener('htmx:afterOnLoad', () => {
     if (loadedPartialsCount === totalPartials) init();
 });
 
+console.log(`GITHUB_TOKEN is: ${process.env.GITHUB_TOKEN}`);
 
