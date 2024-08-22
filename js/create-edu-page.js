@@ -1,28 +1,5 @@
-const apiUrl1 = 'https://api.github.com/repos/vlada-valko/avgust.ua/contents/documents/education/офіс-менеджер';
-
-fetch(apiUrl1, {
-    headers: {
-        'Authorization': `token YOUR_GITHUB_TOKEN`
-    }
-})
-    .then(response => {
-        console.log('Rate limit headers:', {
-            limit: response.headers.get('X-RateLimit-Limit'),
-            remaining: response.headers.get('X-RateLimit-Remaining'),
-            reset: response.headers.get('X-RateLimit-Reset')
-        });
-        return response.json();
-    })
-    .then(data => {
-        console.log('Data:', data);
-    })
-    .catch(error => console.error('Error:', error));
-
-
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
-
-
 
 function getCurrentFilePath() {
     const path = window.location.pathname; // Отримати шлях поточної URL
@@ -32,8 +9,6 @@ function getCurrentFilePath() {
 
 const fileName = getCurrentFilePath();
 const rootPath = `documents/education/${fileName}`;
-console.log(rootPath);
-
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
 
 function fetchWithCache(url) {
@@ -55,26 +30,32 @@ function fetchWithCache(url) {
         });
 }
 
-fetchWithCache(apiUrl)
-    .then(items => {
-        const folders = items.filter(item => item.type === 'dir');
-        folders.forEach(folder => {
-            const folderApiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folder.name}`;
-            fetchFilesForFolder(folderApiUrl, folder.name);
-        });
-    })
-    .catch(error => console.error('Error fetching folders:', error));
+function processAllData(data) {
+    const contentContainer = document.querySelector('.accordion-container');
+    if (!contentContainer) {
+        console.error('Element .accordion-container not found');
+        return;
+    }
 
-function fetchFilesForFolder(apiUrl, folderName) {
-    fetchWithCache(apiUrl)
-        .then(files => {
-            createFolderBlock(folderName, files);
-        })
-        .catch(error => console.error('Error fetching files:', error));
+    const folders = data.filter(item => item.type === 'dir');
+    folders.forEach(folder => {
+        const folderApiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folder.name}`;
+        
+        // Отримати файли в папці
+        fetchWithCache(folderApiUrl)
+            .then(files => {
+                createFolderBlock(folder.name, files);
+            })
+            .catch(error => console.error('Error fetching files:', error));
+    });
 }
 
 function createFolderBlock(folderName, files) {
     const contentContainer = document.querySelector('.accordion-container');
+    if (!contentContainer) {
+        console.error('Element .accordion-container not found');
+        return;
+    }
 
     const setDiv = document.createElement('div');
     setDiv.className = 'set';
@@ -126,3 +107,8 @@ function createFolderBlock(folderName, files) {
     setDiv.appendChild(contentDiv);
     contentContainer.appendChild(setDiv);
 }
+
+// Завантажити дані для поточної сторінки
+fetchWithCache(apiUrl)
+    .then(data => processAllData(data))
+    .catch(error => console.error('Error fetching all data:', error));

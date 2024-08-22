@@ -1,15 +1,18 @@
-import fetch from 'node-fetch';
-import fs from 'fs';
-
-console.log('GITHUB_TOKEN:', process.env.FOR_AVGUST); // Діагностичний вивід
 
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
 const githubToken = process.env.FOR_AVGUST; // Використовуємо секрет
-const cacheFile = 'cache.json'; // Файл для кешування
+const cacheKey = 'cache'; // Використовуйте localStorage для кешування
 
-// Далі код як раніше
+// Замінюємо fs з localStorage
+function getCachedFolders() {
+    const data = localStorage.getItem(cacheKey);
+    return data ? JSON.parse(data) : [];
+}
 
+function updateCache(folders) {
+    localStorage.setItem(cacheKey, JSON.stringify(folders));
+}
 
 async function fetchWithCache(url) {
     try {
@@ -26,10 +29,9 @@ async function fetchWithCache(url) {
 
 async function savePage(fileName, content) {
     const url = `https://api.github.com/repos/${username}/${repo}/contents/навчання/${fileName}`;
-
     const data = {
         message: `Create ${fileName}`,
-        content: Buffer.from(content).toString('base64'),
+        content: btoa(content), // Використовуємо btoa для перетворення в base64
         branch: 'main'
     };
 
@@ -103,18 +105,6 @@ async function checkIfPageExists(fileName) {
     }
 }
 
-async function getCachedFolders() {
-    if (fs.existsSync(cacheFile)) {
-        const data = fs.readFileSync(cacheFile);
-        return JSON.parse(data);
-    }
-    return [];
-}
-
-async function updateCache(folders) {
-    fs.writeFileSync(cacheFile, JSON.stringify(folders, null, 2));
-}
-
 async function createPageForFolder(folderName) {
     const template = `
     <!DOCTYPE html>
@@ -154,7 +144,7 @@ async function processFolders() {
         const items = await fetchWithCache(`https://api.github.com/repos/${username}/${repo}/contents/documents/education`);
         const currentFolders = items.filter(item => item.type === 'dir').map(item => item.name);
 
-        const cachedFolders = await getCachedFolders();
+        const cachedFolders = getCachedFolders();
 
         // Додати нові або оновити існуючі
         for (const folder of currentFolders) {
@@ -170,7 +160,7 @@ async function processFolders() {
             }
         }
 
-        await updateCache(currentFolders);
+        updateCache(currentFolders);
     } catch (error) {
         console.error('Error processing folders:', error);
     }
