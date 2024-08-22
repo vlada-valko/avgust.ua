@@ -8,7 +8,7 @@ function getCurrentFilePath() {
 }
 
 const fileName = getCurrentFilePath();
-const rootPath = `documents/education/${fileName}`;
+const rootPath = `матеріали навчання`;
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
 
 function fetchWithCache(url) {

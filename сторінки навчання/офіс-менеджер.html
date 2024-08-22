@@ -42,7 +42,7 @@
     <script>
         const username = 'vlada-valko';
         const repo = 'avgust.ua';
-        const rootPath = 'documents/education/менеджр-операціоніст';
+        const rootPath = 'матеріали навчання';
         const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
 
         function fetchWithCache(url) {
@@ -100,6 +100,9 @@
                 const folderConfig = folderConfigs[folderName];
                 return fetchWithCache(url)
                     .then(files => {
+                        if (folderConfig === 'all') {
+                            files.sort((a, b) => a.name.localeCompare(b.name)); // Sort files by name
+                        }
                         createFolderBlock(folderName, files, folderConfig);
                     })
                     .catch(error => console.error('Error fetching files in folder:', error));
@@ -135,13 +138,22 @@
             const contentDiv = document.createElement('div');
             contentDiv.className = 'content';
 
-            files.forEach(file => {
-                if (file.type === 'file') {
-                    if (folderConfig === "all" || (Array.isArray(folderConfig) && folderConfig.includes(file.name))) {
+            // Process files based on folderConfig
+            if (folderConfig === 'all') {
+                files.forEach(file => {
+                    if (file.type === 'file') {
                         createFileBlock(file, contentDiv);
                     }
-                }
-            });
+                });
+            } else {
+                // Handle specific file list if provided
+                folderConfig.forEach(fileName => {
+                    const file = files.find(f => f.name === fileName);
+                    if (file) {
+                        createFileBlock(file, contentDiv);
+                    }
+                });
+            }
 
             setDiv.appendChild(titleLink);
             setDiv.appendChild(contentDiv);
