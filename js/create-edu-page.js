@@ -26,10 +26,23 @@ function getConfig() {
     const configElement = document.getElementById('folders-config');
     if (!configElement) {
         console.error('Element #folders-config not found');
-        return { folders: {}, files: [] };
+        return { folders: {} }; // Повертаємо пустий об'єкт, так як немає поля `files`
     }
 
-    return JSON.parse(configElement.textContent);
+    try {
+        const config = JSON.parse(configElement.textContent);
+
+        // Перевірка, чи є `folders` об'єктом
+        if (typeof config.folders !== 'object' || config.folders === null) {
+            console.warn('Config folders is not an object. Defaulting to empty object.');
+            config.folders = {};
+        }
+
+        return config;
+    } catch (error) {
+        console.error('Error parsing config:', error);
+        return { folders: {} }; // Повертаємо пустий об'єкт, так як немає поля `files`
+    }
 }
 
 function formatFileName(fileName) {
@@ -47,7 +60,10 @@ function createSection() {
 
     const bannerHeading = document.createElement('h1');
     bannerHeading.className = 'aditional__h1';
-    bannerHeading.textContent = 'Навчання'; // Ви можете змінити текст за потреби
+
+    // Отримання назви HTML-файлу
+    const fileName = document.title.replace(/\.html$/, '');
+    bannerHeading.textContent = `Курс: ${fileName}`;
 
     bannerDiv.appendChild(bannerHeading);
 
@@ -71,28 +87,29 @@ function processData(data) {
 
     const config = getConfig();
     const folderConfigs = config.folders;
-    const fileNames = config.files;
 
-    // Create a map of folder names to their API URLs
+    // Створити карту URL-адрес для папок
     const folderApiUrls = Object.keys(folderConfigs).reduce((urls, folderName) => {
-        const folder = data.find(item => item.type === 'dir' && item.name === folderName);
+        const normalizedFolderName = folderName.toLowerCase();
+        const folder = data.find(item => item.type === 'dir' && item.name.toLowerCase() === normalizedFolderName);
         if (folder) {
-            urls[folderName] = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folderName}`;
+            urls[folderName] = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folder.name}`;
         }
         return urls;
     }, {});
 
-    // Process folders according to config
+    // Обробка папок згідно з конфігурацією
     const folderPromises = Object.keys(folderConfigs).map(folderName => {
         const url = folderApiUrls[folderName];
         const folderConfig = folderConfigs[folderName];
         return fetchWithCache(url)
             .then(files => {
                 if (folderConfig === 'all') {
-                    files.sort((a, b) => a.name.localeCompare(b.name)); // Sort files by name
+                    files.sort((a, b) => a.name.localeCompare(b.name)); // Сортування файлів за назвою
                 } else {
-                    // Filter files based on config
-                    files = files.filter(file => folderConfig.includes(file.name));
+                    // Фільтрувати файли на основі конфігурації
+                    const normalizedFolderConfig = folderConfig.map(name => name.toLowerCase());
+                    files = files.filter(file => normalizedFolderConfig.includes(file.name.toLowerCase()));
                     files.sort((a, b) => a.name.localeCompare(b.name));
                 }
                 return createFolderBlock(folderName, files, folderConfig);
@@ -100,11 +117,7 @@ function processData(data) {
             .catch(error => console.error('Error fetching files in folder:', error));
     });
 
-    // Process files that are not in any folder
-    const files = data.filter(item => item.type === 'file' && fileNames.includes(item.name));
-    createFileBlocks(files);
-
-    // Wait for all folder data to be processed
+    // Очікування обробки всіх даних
     Promise.all(folderPromises)
         .catch(error => console.error('Error processing folders:', error));
 }
@@ -130,10 +143,13 @@ function createFolderBlock(folderName, files, folderConfig) {
     const contentDiv = document.createElement('div');
     contentDiv.className = 'content';
 
-    // Process files based on folderConfig
-    const sortedFiles = folderConfig === 'all' ? files : files.filter(file => folderConfig.includes(file.name));
+    // Обробка файлів на основі конфігурації
+    const normalizedFolderConfig = folderConfig === 'all' ? [] : folderConfig.map(name => name.toLowerCase());
+    const sortedFiles = files.filter(file => {
+        return folderConfig === 'all' || normalizedFolderConfig.includes(file.name.toLowerCase());
+    });
     sortedFiles.forEach((file, index) => {
-        setTimeout(() => createFileBlock(file, contentDiv), index * 500); // 500ms delay between files
+        setTimeout(() => createFileBlock(file, contentDiv), index * 500); // Затримка в 500ms між файлами
     });
 
     setDiv.appendChild(titleLink);
@@ -172,29 +188,6 @@ function createFileBlock(file, container) {
     contentWrapperDiv.appendChild(fileTitle);
     contentWrapperDiv.appendChild(contentBtnsDiv);
     container.appendChild(contentWrapperDiv);
-}
-
-function createFileBlocks(files) {
-    const contentContainer = document.querySelector('.accordion-container');
-    if (!contentContainer) {
-        console.error('Element .accordion-container not found');
-        return;
-    }
-
-    files.forEach((file, index) => {
-        setTimeout(() => {
-            const setDiv = document.createElement('div');
-            setDiv.className = 'set';
-
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'content';
-
-            createFileBlock(file, contentDiv);
-
-            setDiv.appendChild(contentDiv);
-            contentContainer.appendChild(setDiv);
-        }, index * 500); // 500ms delay between files
-    });
 }
 
 // Завантажити дані для поточної сторінки та створити секцію
