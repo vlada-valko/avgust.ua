@@ -1,3 +1,20 @@
+// Функція для отримання назви файлу з URL
+function getFileNameFromUrl(url) {
+    const parts = url.split('/');
+    return parts[parts.length - 1].split('.')[0];
+}
+
+// Функція для оновлення тегу <title>
+function updateTitleFromFilename() {
+    // Отримати ім'я файлу з URL
+    const fileName = getFileNameFromUrl(window.location.pathname);
+    // Оновити тег <title>
+    document.title = fileName || 'Офіс-менеджер'; // 'Офіс-менеджер' - значення за замовчуванням
+}
+
+// Викликати функцію для оновлення заголовка
+updateTitleFromFilename();
+
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
 const rootPath = 'матеріали-навчання';
@@ -51,6 +68,9 @@ function formatFileName(fileName) {
 }
 
 function createSection() {
+    // Отримати ім'я файлу HTML з <title> тегу
+    const pageTitle = document.title || 'Офіс-менеджер';
+
     // Створення секції
     const section = document.createElement('section');
 
@@ -60,10 +80,9 @@ function createSection() {
 
     const bannerHeading = document.createElement('h1');
     bannerHeading.className = 'aditional__h1';
-
-    // Отримання назви HTML-файлу
-    const fileName = document.title.replace(/\.html$/, '');
-    bannerHeading.textContent = `Курс: ${fileName}`;
+    
+    // Встановлюємо текст заголовка як назву сторінки
+    bannerHeading.textContent = pageTitle;
 
     bannerDiv.appendChild(bannerHeading);
 
@@ -198,3 +217,30 @@ fetchWithCache(apiUrl)
         processData(data);
     })
     .catch(error => console.error('Error fetching all data:', error));
+// Функція для декодування URI
+function decodeURIComponentSafe(uri) {
+    try {
+        return decodeURIComponent(uri);
+    } catch (e) {
+        console.error('Error decoding URI:', e);
+        return uri;
+    }
+}
+
+// Функція для отримання назви файлу з URL
+function getFileNameFromUrl(url) {
+    const decodedUrl = decodeURIComponentSafe(url);
+    const parts = decodedUrl.split('/');
+    return parts[parts.length - 1].split('.')[0];
+}
+
+// Функція для оновлення тегу <title>
+function updateTitleFromFilename() {
+    // Отримати ім'я файлу з URL
+    const fileName = getFileNameFromUrl(window.location.pathname);
+    // Оновити тег <title>
+    document.title = fileName || 'Офіс-менеджер'; // 'Офіс-менеджер' - значення за замовчуванням
+}
+
+// Викликати функцію для оновлення заголовка
+updateTitleFromFilename();
