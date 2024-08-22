@@ -36,7 +36,6 @@
             "Теорія продажів": "all",
             "види друку, та до- та після друкарської обробки": "all",
             "дизайнерські папери та картони": ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"]
-            
         }
     }
     </script>
@@ -73,6 +72,11 @@
             }
 
             return JSON.parse(configElement.textContent);
+        }
+
+        function formatFileName(fileName) {
+            // Видаляємо цифри перед крапкою
+            return fileName.replace(/^\d+\.\s*/, '');
         }
 
         function processData(data) {
@@ -157,9 +161,12 @@
             const contentWrapperDiv = document.createElement('div');
             contentWrapperDiv.className = 'content-wrapper';
 
+            // Отримати відформатовану назву файлу
+            const formattedFileName = formatFileName(file.name);
+
             const fileTitle = document.createElement('p');
             fileTitle.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
-            fileTitle.innerHTML = `<img src="../img/education/${file.name}" alt="">${file.name}`;
+            fileTitle.innerHTML = `<img src="../img/education/${file.name}" alt="">${formattedFileName}`;
 
             const contentBtnsDiv = document.createElement('div');
             contentBtnsDiv.className = 'content-btns';
