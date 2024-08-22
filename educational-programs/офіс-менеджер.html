@@ -13,36 +13,49 @@
         integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
         crossorigin="anonymous"></script>
 </head>
-
+<!-- 
+    ОСЬ ЦЕЙ ШМАТОК ЧІПАТИ НЕ МОЖНА
+-->
 <body class="education-body">
     <header>
         <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
     </header>
-    <section>
-        <div class="education-page-banner aditional__banner">
-            <h1 class="aditional__h1">Навчання</h1>
-        </div>
-        <div class="accordion-container">
-            <!-- Динамічний контент буде додаватися тут -->
-        </div>
-    </section>
+    <main id="content-container">
+        <!-- Динамічний контент буде додаватися тут -->
+    </main>
     <footer>
         <!-- <footer data-hx-trigger="load" data-hx-swap="outerHTML" 
         data-hx-get="footer.partial.html"></footer>-->
     </footer>
+<!-- 
+    ОСЬ ЦЕЙ ШМАТОК ЧІПАТИ НЕ МОЖНА
+-->
+    <!-- 
+        ВНИЗУ МІНЯЄМО НАПОВНЕННЯ НАШОЇ СТОРІНКИ. РЕГІСТР НЕ ВАЖЛИВИЙ, ГОЛОВНЕ - СПІВПАДІННЯ ІМЕН
+        ЛОГІКА:
+        "НАЗВА ПАПКИ": "all" - ДЛЯ ТОГО, АБИ ЗАГРУЗИТИ З ПАПКИ ВСЕ,
+                        ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"] - ПЕРЕЛІЧИТИ БЕРЕЗ КОМУ І В "" НАЗВИ ПОТРІБНИХ ДОКУМЕНТІВ
 
-    
+        НАПРИКЛАД
+        "Теорія продажів": "all",
+        "вивчення нашого програмного забезпечення": "all",
+        "види друку, та до- та після друкарської обробки": "all",
+        "дизайнерські папери та картони": ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"]
+    -->
     <script id="folders-config" type="application/json">
     {
-        "folders": {
-            "Теорія продажів": "all",
-            "вивчення нашого програмного забезпечення": "all",
-            "види друку, та до- та після друкарської обробки": "all",
-            "дизайнерські папери та картони": ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"]
+        "folders": { 
+    
+            "ТеОрія продажів": "all", 
+            "вивчення нашого програмного забезпечення": "all", 
+            "види друку, та до- та після друкарської обробки": "all", 
+            "дизайнерські папери та картони": ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"] 
+
         }
     }
     </script>
-  <script src="../js/create-edu-page.js"></script>
+
+    <script src="../js/create-edu-page.js"></script>
 </body>
 
 </html>

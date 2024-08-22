@@ -1,4 +1,3 @@
-
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
 const rootPath = 'матеріали-навчання';
@@ -36,6 +35,31 @@ function getConfig() {
 function formatFileName(fileName) {
     // Видаляємо цифри перед крапкою
     return fileName.replace(/^\d+\.\s*/, '');
+}
+
+function createSection() {
+    // Створення секції
+    const section = document.createElement('section');
+
+    // Створення банера
+    const bannerDiv = document.createElement('div');
+    bannerDiv.className = 'education-page-banner aditional__banner';
+
+    const bannerHeading = document.createElement('h1');
+    bannerHeading.className = 'aditional__h1';
+    bannerHeading.textContent = 'Навчання'; // Ви можете змінити текст за потреби
+
+    bannerDiv.appendChild(bannerHeading);
+
+    // Створення контейнера для динамічного контенту
+    const accordionContainer = document.createElement('div');
+    accordionContainer.className = 'accordion-container';
+
+    // Додавання банера і контейнера в секцію
+    section.appendChild(bannerDiv);
+    section.appendChild(accordionContainer);
+
+    return section;
 }
 
 function processData(data) {
@@ -173,7 +197,11 @@ function createFileBlocks(files) {
     });
 }
 
-// Завантажити дані для поточної сторінки
+// Завантажити дані для поточної сторінки та створити секцію
 fetchWithCache(apiUrl)
-    .then(data => processData(data))
+    .then(data => {
+        const contentContainer = document.getElementById('content-container');
+        contentContainer.appendChild(createSection());
+        processData(data);
+    })
     .catch(error => console.error('Error fetching all data:', error));
