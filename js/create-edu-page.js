@@ -34,6 +34,12 @@ const repo = 'avgust.ua';
 const rootPath = 'матеріали-навчання';
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
 
+// Функція для очищення кешу
+function clearCache() {
+    localStorage.clear();
+}
+
+// Функція для отримання даних з кешу або з API
 function fetchWithCache(url) {
     const cachedData = localStorage.getItem(url);
     if (cachedData) {
@@ -53,6 +59,7 @@ function fetchWithCache(url) {
         });
 }
 
+// Функція для отримання конфігурації з HTML
 function getConfig() {
     const configElement = document.getElementById('folders-config');
     if (!configElement) {
@@ -74,10 +81,12 @@ function getConfig() {
     }
 }
 
+// Функція для форматування назви файлу
 function formatFileName(fileName) {
     return fileName.replace(/^\d+\.\s*/, '');
 }
 
+// Функція для створення секції
 function createSection() {
     const pageTitle = document.title || 'Офіс-менеджер';
 
@@ -88,7 +97,7 @@ function createSection() {
 
     const bannerHeading = document.createElement('h1');
     bannerHeading.className = 'aditional__h1';
-    bannerHeading.textContent = `${pageTitle} - курс "${pageTitle}"`; // Додавання тексту до заголовка
+    bannerHeading.textContent = `курс "${pageTitle}"`; // Додавання тексту до заголовка
 
     bannerDiv.appendChild(bannerHeading);
 
@@ -101,6 +110,7 @@ function createSection() {
     return section;
 }
 
+// Функція для обробки отриманих даних
 function processData(data) {
     const contentContainer = document.querySelector('.accordion-container');
     if (!contentContainer) {
@@ -124,20 +134,16 @@ function processData(data) {
                         files = files.filter(file => normalizedFolderConfig.includes(file.name.toLowerCase()));
                     }
                     files.sort((a, b) => a.name.localeCompare(b.name)); // Сортування файлів за назвою
-                    createFolderBlock(folderName, files, folderConfigs[folderName]);
+                    const folderBlock = createFolderBlock(folderName, files, folderConfigs[folderName]);
+                    contentContainer.appendChild(folderBlock);
                 })
                 .catch(error => console.error('Error fetching files in folder:', error));
         }
     });
 }
 
+// Функція для створення блоку папки
 function createFolderBlock(folderName, files, folderConfig) {
-    const contentContainer = document.querySelector('.accordion-container');
-    if (!contentContainer) {
-        console.error('Element .accordion-container not found');
-        return;
-    }
-
     const setDiv = document.createElement('div');
     setDiv.className = 'set';
 
@@ -151,16 +157,31 @@ function createFolderBlock(folderName, files, folderConfig) {
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'content';
+    contentDiv.style.display = 'none'; // Сховати вміст за замовчуванням
 
+    // Додаємо блоки для файлів
     files.forEach((file, index) => {
-        setTimeout(() => createFileBlock(file, contentDiv), index * 500); // Затримка в 500ms між файлами
+        setTimeout(() => {
+            if (file.type === 'dir') {
+                // Додаємо підпапки
+                fetchWithCache(`https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folderName}/${file.name}`)
+                    .then(subfolderFiles => {
+                        const subfolderBlock = createFolderBlock(file.name, subfolderFiles, {});
+                        contentDiv.appendChild(subfolderBlock);
+                    })
+                    .catch(error => console.error('Error fetching subfolder data:', error));
+            } else {
+                createFileBlock(file, contentDiv);
+            }
+        }, index * 500); // Затримка в 500ms між файлами
     });
 
     setDiv.appendChild(titleLink);
     setDiv.appendChild(contentDiv);
-    contentContainer.appendChild(setDiv);
+    return setDiv;
 }
 
+// Функція для створення блоку файлу
 function createFileBlock(file, container) {
     const contentWrapperDiv = document.createElement('div');
     contentWrapperDiv.className = 'content-wrapper';
@@ -204,7 +225,9 @@ function createFileBlock(file, container) {
     container.appendChild(contentWrapperDiv);
 }
 
-// Завантажити дані для поточної сторінки та створити секцію
+// Очищення кешу та завантаження даних для поточної сторінки
+clearCache(); // Очищення кешу при оновленні
+
 fetchWithCache(apiUrl)
     .then(data => {
         const contentContainer = document.getElementById('content-container');
