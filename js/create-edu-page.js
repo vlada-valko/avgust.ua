@@ -1,18 +1,32 @@
+// Функція для декодування URI
+function decodeURIComponentSafe(uri) {
+    try {
+        return decodeURIComponent(uri);
+    } catch (e) {
+        console.error('Error decoding URI:', e);
+        return uri;
+    }
+}
+
 // Функція для отримання назви файлу з URL
 function getFileNameFromUrl(url) {
-    const parts = url.split('/');
+    const decodedUrl = decodeURIComponentSafe(url);
+    const parts = decodedUrl.split('/');
     return parts[parts.length - 1].split('.')[0];
+}
+
+// Функція для отримання розширення файлу
+function getFileExtension(fileName) {
+    const parts = fileName.split('.');
+    return parts.length > 1 ? parts[parts.length - 1] : '';
 }
 
 // Функція для оновлення тегу <title>
 function updateTitleFromFilename() {
-    // Отримати ім'я файлу з URL
     const fileName = getFileNameFromUrl(window.location.pathname);
-    // Оновити тег <title>
-    document.title = fileName || 'Офіс-менеджер'; // 'Офіс-менеджер' - значення за замовчуванням
+    document.title = fileName || 'Офіс-менеджер'; // Значення за замовчуванням
 }
 
-// Викликати функцію для оновлення заголовка
 updateTitleFromFilename();
 
 const username = 'vlada-valko';
@@ -43,13 +57,11 @@ function getConfig() {
     const configElement = document.getElementById('folders-config');
     if (!configElement) {
         console.error('Element #folders-config not found');
-        return { folders: {} }; // Повертаємо пустий об'єкт, так як немає поля `files`
+        return { folders: {} };
     }
 
     try {
         const config = JSON.parse(configElement.textContent);
-
-        // Перевірка, чи є `folders` об'єктом
         if (typeof config.folders !== 'object' || config.folders === null) {
             console.warn('Config folders is not an object. Defaulting to empty object.');
             config.folders = {};
@@ -58,39 +70,31 @@ function getConfig() {
         return config;
     } catch (error) {
         console.error('Error parsing config:', error);
-        return { folders: {} }; // Повертаємо пустий об'єкт, так як немає поля `files`
+        return { folders: {} };
     }
 }
 
 function formatFileName(fileName) {
-    // Видаляємо цифри перед крапкою
     return fileName.replace(/^\d+\.\s*/, '');
 }
 
 function createSection() {
-    // Отримати ім'я файлу HTML з <title> тегу
     const pageTitle = document.title || 'Офіс-менеджер';
 
-    // Створення секції
     const section = document.createElement('section');
 
-    // Створення банера
     const bannerDiv = document.createElement('div');
     bannerDiv.className = 'education-page-banner aditional__banner';
 
     const bannerHeading = document.createElement('h1');
     bannerHeading.className = 'aditional__h1';
-    
-    // Встановлюємо текст заголовка як назву сторінки
-    bannerHeading.textContent = pageTitle;
+    bannerHeading.textContent = `${pageTitle} - курс "${pageTitle}"`; // Додавання тексту до заголовка
 
     bannerDiv.appendChild(bannerHeading);
 
-    // Створення контейнера для динамічного контенту
     const accordionContainer = document.createElement('div');
     accordionContainer.className = 'accordion-container';
 
-    // Додавання банера і контейнера в секцію
     section.appendChild(bannerDiv);
     section.appendChild(accordionContainer);
 
@@ -107,38 +111,24 @@ function processData(data) {
     const config = getConfig();
     const folderConfigs = config.folders;
 
-    // Створити карту URL-адрес для папок
-    const folderApiUrls = Object.keys(folderConfigs).reduce((urls, folderName) => {
+    // Проходимо по кожній папці в порядку, визначеному в JSON
+    Object.keys(folderConfigs).forEach(folderName => {
         const normalizedFolderName = folderName.toLowerCase();
         const folder = data.find(item => item.type === 'dir' && item.name.toLowerCase() === normalizedFolderName);
         if (folder) {
-            urls[folderName] = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folder.name}`;
-        }
-        return urls;
-    }, {});
-
-    // Обробка папок згідно з конфігурацією
-    const folderPromises = Object.keys(folderConfigs).map(folderName => {
-        const url = folderApiUrls[folderName];
-        const folderConfig = folderConfigs[folderName];
-        return fetchWithCache(url)
-            .then(files => {
-                if (folderConfig === 'all') {
+            const folderUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${folder.name}`;
+            fetchWithCache(folderUrl)
+                .then(files => {
+                    if (folderConfigs[folderName] !== 'all') {
+                        const normalizedFolderConfig = folderConfigs[folderName].map(name => name.toLowerCase());
+                        files = files.filter(file => normalizedFolderConfig.includes(file.name.toLowerCase()));
+                    }
                     files.sort((a, b) => a.name.localeCompare(b.name)); // Сортування файлів за назвою
-                } else {
-                    // Фільтрувати файли на основі конфігурації
-                    const normalizedFolderConfig = folderConfig.map(name => name.toLowerCase());
-                    files = files.filter(file => normalizedFolderConfig.includes(file.name.toLowerCase()));
-                    files.sort((a, b) => a.name.localeCompare(b.name));
-                }
-                return createFolderBlock(folderName, files, folderConfig);
-            })
-            .catch(error => console.error('Error fetching files in folder:', error));
+                    createFolderBlock(folderName, files, folderConfigs[folderName]);
+                })
+                .catch(error => console.error('Error fetching files in folder:', error));
+        }
     });
-
-    // Очікування обробки всіх даних
-    Promise.all(folderPromises)
-        .catch(error => console.error('Error processing folders:', error));
 }
 
 function createFolderBlock(folderName, files, folderConfig) {
@@ -162,12 +152,7 @@ function createFolderBlock(folderName, files, folderConfig) {
     const contentDiv = document.createElement('div');
     contentDiv.className = 'content';
 
-    // Обробка файлів на основі конфігурації
-    const normalizedFolderConfig = folderConfig === 'all' ? [] : folderConfig.map(name => name.toLowerCase());
-    const sortedFiles = files.filter(file => {
-        return folderConfig === 'all' || normalizedFolderConfig.includes(file.name.toLowerCase());
-    });
-    sortedFiles.forEach((file, index) => {
+    files.forEach((file, index) => {
         setTimeout(() => createFileBlock(file, contentDiv), index * 500); // Затримка в 500ms між файлами
     });
 
@@ -180,12 +165,22 @@ function createFileBlock(file, container) {
     const contentWrapperDiv = document.createElement('div');
     contentWrapperDiv.className = 'content-wrapper';
 
-    // Отримати відформатовану назву файлу
     const formattedFileName = formatFileName(file.name);
+    const fileExtension = getFileExtension(file.name);
 
     const fileTitle = document.createElement('p');
     fileTitle.className = 'index__our-values__carousel-title index__our-values__carousel-title-small';
-    fileTitle.innerHTML = `<img src="../img/education/${file.name}" alt="">${formattedFileName}`;
+
+    // Створюємо елемент зображення з обробкою помилок завантаження
+    const imgElement = document.createElement('img');
+    imgElement.src = `../img/education/${fileExtension}.png`;
+    imgElement.alt = formattedFileName;
+    imgElement.onerror = () => {
+        imgElement.src = '../img/education/default.png'; // Використання default.png при помилці завантаження
+    };
+
+    fileTitle.appendChild(imgElement);
+    fileTitle.append(` ${formattedFileName}`);
 
     const contentBtnsDiv = document.createElement('div');
     contentBtnsDiv.className = 'content-btns';
@@ -217,30 +212,3 @@ fetchWithCache(apiUrl)
         processData(data);
     })
     .catch(error => console.error('Error fetching all data:', error));
-// Функція для декодування URI
-function decodeURIComponentSafe(uri) {
-    try {
-        return decodeURIComponent(uri);
-    } catch (e) {
-        console.error('Error decoding URI:', e);
-        return uri;
-    }
-}
-
-// Функція для отримання назви файлу з URL
-function getFileNameFromUrl(url) {
-    const decodedUrl = decodeURIComponentSafe(url);
-    const parts = decodedUrl.split('/');
-    return parts[parts.length - 1].split('.')[0];
-}
-
-// Функція для оновлення тегу <title>
-function updateTitleFromFilename() {
-    // Отримати ім'я файлу з URL
-    const fileName = getFileNameFromUrl(window.location.pathname);
-    // Оновити тег <title>
-    document.title = fileName || 'Офіс-менеджер'; // 'Офіс-менеджер' - значення за замовчуванням
-}
-
-// Викликати функцію для оновлення заголовка
-updateTitleFromFilename();
