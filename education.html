@@ -1,46 +1,31 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>заголовок</title> <!-- Заголовок за замовчуванням -->
+        <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/aditional-css/education.css">
+        <link rel="stylesheet" href="css/aditional-css/education-nav.css">
+        <script src="https://unpkg.com/htmx.org@1.9.10"
+            integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+            crossorigin="anonymous"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Avgust.ua
-    </title>
-    <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/aditional-css/education.css">
-    <script src="https://unpkg.com/htmx.org@1.9.10"
-        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
-        crossorigin="anonymous"></script>
-</head>
-
+    </head>
 <body class="education-body">
     <header>
-        <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="header-nav.partial.html"></nav>
+        <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="../header-nav.partial.html"></nav>
     </header>
-    <section class="">
-        <div class="education-page-banner aditional__banner">
-            <h1 class="aditional__h1">Навчальні програми</h1>
-        </div>
-        <div class="educational-cards">
-            
-        </div>
+    
+  <div class="page-content">
+  </div>
 
-      
-    </section>
-    <footer>
-        <!-- <footer data-hx-trigger="load" data-hx-swap="outerHTML" 
-        data-hx-get="footer.partial.html"></footer>-->
-
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/education-accordeon.js"></script>
-
-
+  <script src="js/nav-of-education.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="/js/slick.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/modal.js"></script>
 </body>
-
 </html>
