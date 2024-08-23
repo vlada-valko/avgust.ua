@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>заголовок</title> <!-- Заголовок за замовчуванням -->
+    <link rel="icon" href="/img/logo-small.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aditional-css/education.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+</head>
+<body class="education-body">
+    <header>
+        <nav data-hx-trigger="load" data-hx-swap="outerHTML" data-hx-get="../header-nav.partial.html"></nav>
+    </header>
+    <main id="content-container">
+        <!-- Динамічний контент буде додаватися тут -->
+    </main>
+    <footer>
+        <!-- <footer data-hx-trigger="load" data-hx-swap="outerHTML" 
+        data-hx-get="footer.partial.html"></footer>-->
+    </footer>
+
+      <!-- 
+        ВНИЗУ МІНЯЄМО НАПОВНЕННЯ НАШОЇ СТОРІНКИ. РЕГІСТР НЕ ВАЖЛИВИЙ, ГОЛОВНЕ - СПІВПАДІННЯ ІМЕН
+        ЛОГІКА:
+        "НАЗВА ПАПКИ": "all" - ДЛЯ ТОГО, АБИ ЗАГРУЗИТИ З ПАПКИ ВСЕ,
+         "НАЗВА ПАПКИ":  ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"] - ПЕРЕЛІЧИТИ БЕРЕЗ КОМУ І В "" НАЗВИ ПОТРІБНИХ ДОКУМЕНТІВ
+         ПЕРЕЛІЧУЄМО ЧЕРЕЗ КОМУ
+
+        НАПРИКЛАД
+          {
+        "folders": { 
+            "ТеОрія продажів": "all", 
+            "вивчення нашого програмного забезпечення": "all", 
+            "види друку, та до- та після друкарської обробки": "all", 
+            "дизайнерські папери та картони": ["групи колекцій.pdf", "типи колекцій та їх опис.pdf"]
+        }
+    }
+    -->
+    <!--  ОСЬ ТУТ МІНЯЄМО НАПОВНЕННЯ НАШОГО КУРСУ  -->
+    <script id="folders-config" type="application/json">
+    {
+        "folders": { 
+            "назва папки": "all", 
+            "назва папки": "all", 
+            "назва папки": "all", 
+            "назва папки": ["назва файлу", "назва файлу"]
+        }
+    }
+    </script>
+
+    
+
+
+    <script src="../js/create-edu-page.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../js/slick.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/modal.js"></script>
+</body>
+
+</html>
