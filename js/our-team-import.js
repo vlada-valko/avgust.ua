@@ -1,82 +1,106 @@
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("json/file.json")
-        .then((response) => response.json())
+    fetch("https://docs.google.com/spreadsheets/d/1q4l60xlMyc-1n8BP9DKrlC-YCAawaOy-JI3i8di-7NQ/export?format=csv")
+        .then((response) => response.text())
         .then((data) => {
-            var container = document.querySelector(".employee-conteiner");
-            var cards = [];
+            const container = document.querySelector(".employee-container"); // Контейнер для карток
+            const cards = []; // Масив для карток
 
-            data.forEach(function (employee) {
-                const fullName = employee["П.І.Б"];
+            // Розбиваємо CSV на рядки
+            const rows = data.trim().split("\n");
+
+            // Обробляємо дані, починаючи з другого рядка (пропускаємо заголовки)
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].split(",");
+
+                if (cells.length < 14) continue; // Пропускаємо неповні або порожні рядки
+
+                const fullName = cells[1].trim();
+                const department = cells[3].trim();
+                const position = cells[4].trim();
+                const phone = cells[9].trim();
+                const birthDate = cells[11].trim();
+                const email = cells[12].trim();
                 const lastName = fullName.split(" ")[0];
 
+                // Перевірка фото
                 let photoSrc = `img/employee/${lastName}.jpg`;
+
+                loadImage(photoSrc, lastName, fullName, department, position, phone, birthDate, email);
+            }
+
+            function loadImage(photoSrc, lastName, fullName, department, position, phone, birthDate, email) {
                 let imgElement = new Image();
                 imgElement.onload = function () {
-                    appendCard(photoSrc, employee);
+                    appendCard(photoSrc, fullName, department, position, phone, birthDate, email);
                 };
                 imgElement.onerror = function () {
-                    photoSrc = `img/employee/${lastName}.png`;
-                    let imgElementPng = new Image();
-                    imgElementPng.onload = function () {
-                        appendCard(photoSrc, employee);
-                    };
-                    imgElementPng.onerror = function () {
-                        photoSrc = `img/employee/${lastName}.jfif`;
-                        let imgElementJfif = new Image();
-                        imgElementJfif.onload = function () {
-                            appendCard(photoSrc, employee);
-                        };
-                        imgElementJfif.onerror = function () {
-                            photoSrc = `img/employee/default.jpg`;
-                            appendCard(photoSrc, employee);
-                        };
-                        imgElementJfif.src = photoSrc;
-                    };
-                    imgElementPng.src = photoSrc;
+                    // Якщо .jpg не знайдено, пробуємо інші формати
+                    let alternativeSrcs = [`img/employee/${lastName}.png`, `img/employee/${lastName}.jfif`, `img/employee/default.jpg`];
+                    tryOtherFormats(alternativeSrcs, fullName, department, position, phone, birthDate, email);
                 };
                 imgElement.src = photoSrc;
+            }
 
-                function appendCard(photoSrc, employee) {
-                    
-                    var cardHTML = `
-                        <div class="card" id="${lastName}" >
-                            <div class="employee-photo">
-                                <img src="${photoSrc}" alt="Фото ${employee["П.І.Б"]}">
+            function tryOtherFormats(srcList, fullName, department, position, phone, birthDate, email) {
+                let index = 0;
+                let tryNext = () => {
+                    if (index >= srcList.length) return; // Усі формати перевірені, картка не додається
+                    let imgElement = new Image();
+                    imgElement.onload = function () {
+                        appendCard(srcList[index], fullName, department, position, phone, birthDate, email);
+                    };
+                    imgElement.onerror = function () {
+                        index++;
+                        tryNext(); // Пробуємо наступний формат
+                    };
+                    imgElement.src = srcList[index];
+                };
+                tryNext();
+            }
+
+            function appendCard(photoSrc, fullName, department, position, phone, birthDate, email) {
+                const cardHTML = `
+                    <div class="card" id="${fullName.split(" ")[0]}">
+                        <div class="employee-photo">
+                            <img src="${photoSrc}" alt="Фото ${fullName}">
+                        </div>
+                        <div class="employee-info">
+                            <h2 class="big__h2">${fullName}</h2>
+                            <p>Департамент: ${department}</p>
+                            <p>Посада: ${position}</p>
+                            <div class="btn-wrapper">
+                                <a class="team-active" href="#"><span>Детальна інформація</span></a>
                             </div>
-                            <div class="employee-info">
-                                <h2 class="big__h2">${employee["П.І.Б"]}</h2>
-                                <p>Департамент: ${employee["Департамент"]}</p>
-                                <p>Посада: ${employee["Позиція в компанії"]}</p>
-                                <div class="btn-wrapper">
-                                    <a class="team-active" href="#"><span>Детальна інформація</span></a>
-                                </div>
-                                <div class="employee-info-full hidden">
-                                    <p>Телефон: ${employee["Особистий мобільний"]}</p>
-                                    <p>Дата народження: ${employee["Дата народження"]}</p>
-                                    <p>Пошта: ${employee["e-mail особистий"]}</p>
-
-                                </div>
+                            <div class="employee-info-full hidden">
+                                <p>Телефон: ${phone}</p>
+                                <p>Дата народження: ${birthDate}</p>
+                                <p>Пошта: ${email}</p>
                             </div>
                         </div>
-                    `;
-                    cards.push(cardHTML);
-                    if (cards.length === data.length) {
-                        container.innerHTML = cards.join("");
-                        // Додавання обробника подій до кожного посилання
-                        var toggleLinks = document.querySelectorAll(".team-active");
-                        toggleLinks.forEach(function(link) {
-                            link.addEventListener("click", function(event) {
-                                event.preventDefault();
-                                var card = event.target.closest(".card");
-                                var infoFull = card.querySelector(".employee-info-full");
-                                infoFull.classList.toggle("hidden");
-                                infoFull.classList.toggle("active");
-                            });
-                        });
-                    }
-                }
-            });
+                    </div>
+                `;
+                cards.push(cardHTML);
+
+                // Оновлюємо контент після кожного додавання картки
+                container.innerHTML = cards.join("");
+                addToggleListeners();
+            }
+
+            function addToggleListeners() {
+                // Додавання обробника подій до кожного посилання
+                const toggleLinks = document.querySelectorAll(".team-active");
+                toggleLinks.forEach(function(link) {
+                    link.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        const card = event.target.closest(".card");
+                        const infoFull = card.querySelector(".employee-info-full");
+                        infoFull.classList.toggle("hidden");
+                        infoFull.classList.toggle("active");
+                    });
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching the CSV file:", error);
         });
 });
-
-

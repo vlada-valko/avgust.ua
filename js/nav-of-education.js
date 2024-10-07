@@ -1,12 +1,11 @@
+function clearCache() {
+    localStorage.clear();
+}
+
 const username = 'vlada-valko';
 const repo = 'avgust.ua';
 const rootPath = 'educational-programs';
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${rootPath}`;
-
-// Функція для очищення кешу
-function clearCache() {
-    localStorage.clear();
-}
 
 // Функція для отримання даних з кешу або з API
 function fetchWithCache(url) {
@@ -36,6 +35,11 @@ function formatFileName(fileName) {
 
 // Функція для створення картки
 function createCard(file) {
+    // Перевірка, чи не містить файл слово "макет" у назві
+    if (file.name.toLowerCase().includes('макет')) {
+        return null; // Не створюємо картку
+    }
+
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -87,18 +91,20 @@ function generateCards(data) {
     }
 
     data.forEach(file => {
-        // Ігноруємо файли з назвою "макет.html"
-        if (file.type === 'file' && file.name !== 'макет.html') {
+        if (file.type === 'file' && !file.name.toLowerCase().includes('макет')) { // Додана перевірка на слово "макет"
             const card = createCard(file);
-            container.appendChild(card);
+            if (card) { // Перевірка, чи створена картка
+                container.appendChild(card);
+            }
         } else if (file.type === 'dir') {
             fetchWithCache(`https://api.github.com/repos/${username}/${repo}/contents/${rootPath}/${file.name}`)
                 .then(subFiles => {
                     subFiles.forEach(subFile => {
-                        // Ігноруємо файли з назвою "макет.html"
-                        if (subFile.type === 'file' && subFile.name !== 'макет.html') {
+                        if (subFile.type === 'file' && !subFile.name.toLowerCase().includes('макет')) { // Додана перевірка на слово "макет"
                             const card = createCard(subFile);
-                            container.appendChild(card);
+                            if (card) { // Перевірка, чи створена картка
+                                container.appendChild(card);
+                            }
                         }
                     });
                 })
